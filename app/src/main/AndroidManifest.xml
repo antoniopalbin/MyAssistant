@@ -16,6 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data android:name="AA_DB_NAME" android:value="MyAssistant.db" />
+        <meta-data android:name="AA_DB_VERSION" android:value="5" />
+        <meta-data android:name="AA_MODELS" android:value="com.master.antonio.myassistant.models.Video" />
+        <meta-data android:name="AA_MODELS" android:value="com.master.antonio.myassistant.models.Beacon" />
+        <meta-data android:name="AA_MODELS" android:value="com.master.antonio.myassistant.models.VideoBeacon" />
+        <meta-data android:name="AA_MODELS" android:value="com.master.antonio.myassistant.models.Aviso" />
+        <meta-data android:name="AA_MODELS" android:value="com.master.antonio.myassistant.models.Actividad" />
     </application>
 
 </manifest>
