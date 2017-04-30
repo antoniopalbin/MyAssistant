@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:id="@+id/buttonRegisterOfActivity"
+        android:layout_width="245dp"
+        android:layout_height="59dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="Registro de actividad"
+        android:textColor="@android:color/background_light"
+        android:layout_marginStart="47dp"
+        android:layout_above="@+id/buttonAdmin"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="25dp" />
+
+    <Button
+        android:id="@+id/buttonAdmin"
+        android:layout_width="245dp"
+        android:layout_height="59dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="Administración"
+        android:textColor="@android:color/background_light"
+        android:layout_marginBottom="98dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/buttonRegisterOfActivity" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="380dp"
+        android:layout_height="240dp"
+        app:srcCompat="@drawable/myassistant"
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="275dp"
+        android:layout_marginStart="212dp"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/buttonRegisterOfActivity" />
+
+</RelativeLayout>
