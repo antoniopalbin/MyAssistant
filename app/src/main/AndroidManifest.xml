@@ -19,6 +19,7 @@
         <activity android:name=".AdminActivity" android:parentActivityName=".MainActivity"/>
 
         <activity android:name=".RegisterActivity" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".VisualizarVideoActivity" />
 
         <meta-data android:name="AA_DB_NAME" android:value="MyAssistant.db" />
         <meta-data android:name="AA_DB_VERSION" android:value="5" />

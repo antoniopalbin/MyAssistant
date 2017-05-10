@@ -27,6 +27,14 @@
         android:layout_marginBottom="98dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/buttonRegisterOfActivity" />
+    <Button
+        android:id="@+id/Prueba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="12dp" />
 
     <ImageView
         android:id="@+id/imageView"
