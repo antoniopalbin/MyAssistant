@@ -6,7 +6,7 @@
     <!-- YouTube Fragment -->
     <fragment
         android:id="@+id/fragment_youtube_lectura"
-        android:name="com.google.android.youtube.player.YouTubePlayerFragment"
+        android:name="com.master.antonio.myassistant.YouTubeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true" />
