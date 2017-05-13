@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+android:orientation="vertical" android:layout_width="match_parent"
+android:layout_height="match_parent">
 
-    <!-- YouTube Fragment -->
-    <fragment
-        android:id="@+id/fragment_youtube_lectura"
-        android:name="com.master.antonio.myassistant.YouTubeFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true" />
+<!-- YouTube Fragment -->
+<fragment
+    android:id="@+id/fragment_youtube"
+    android:name="com.master.antonio.myassistant.YouTubeFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentTop="true" />
 
 </LinearLayout>

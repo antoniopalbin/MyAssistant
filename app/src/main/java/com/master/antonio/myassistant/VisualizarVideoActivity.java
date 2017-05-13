@@ -21,10 +21,9 @@ import com.google.android.youtube.player.YouTubePlayerView;
 public class VisualizarVideoActivity extends AppCompatActivity{
 
     Context cont;
-    public String videoId;
-    private YouTubeFragment fragment;
+    String videoId;
 
-    private static final int RECOVERY_DIALOG_REQUEST =1;
+    private YouTubeFragment fragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class VisualizarVideoActivity extends AppCompatActivity{
         cont = this;
 
 
-        fragment = (YouTubeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_youtube_lectura);
+        fragment = (YouTubeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_youtube);
 
         //Prueba de visualización de video
         videoId = "WkoKLmqYQUo";
