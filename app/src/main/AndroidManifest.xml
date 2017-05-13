@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.master.antonio.myassistant">
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -12,17 +16,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:configChanges="screenSize|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".AdminActivity" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".AdminActivity" android:parentActivityName=".MainActivity" />
 
         <activity android:name=".RegisterActivity" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".VisualizarVideoActivity" />
+        <activity android:name=".VisualizarVideoActivity" android:configChanges="screenSize|orientation" />
+
+        <activity android:name=".DetectarBeaconsActivity" />
 
         <meta-data android:name="AA_DB_NAME" android:value="MyAssistant.db" />
         <meta-data android:name="AA_DB_VERSION" android:value="5" />

@@ -64,10 +64,10 @@ public class RegisterActivity extends AppCompatActivity {
         Registros.add(new Register("Dormitorio","01/05/2017 14:50",R.mipmap.dormitorio));
         Registros.add(new Register("Baño","01/05/2017 17:50",R.mipmap.bano));
 
-        showLVVehiculos_Complejo();
+        showLVRegister_Complejo();
     }
 
-    private void showLVVehiculos_Complejo() {
+    private void showLVRegister_Complejo() {
         ListRegister=(ListView) findViewById(R.id.ListRegister);
         ListRegister.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
 

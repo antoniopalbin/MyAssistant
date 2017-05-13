@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     private void  startPrueba(){
-        Intent intent = new Intent(this, VisualizarVideoActivity.class);
+        Intent intent = new Intent(this, DetectarBeaconsActivity.class);
         startActivity(intent);
 
     }
