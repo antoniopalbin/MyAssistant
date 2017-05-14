@@ -20,6 +20,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
@@ -39,13 +40,33 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
     private String telephoneAddress;
     private boolean manualScanning;
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
+    /*private final BroadcastReceiver receiver = new BroadcastReceiver(){
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            String action = intent.getAction();
+            if(BluetoothDevice.ACTION_FOUND.equals(action)) {
+                int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
+                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+
+                BluetoothDevice dev = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+
+
+                System.out.println("Detectado "+ name +" ##################################################" + rssi + "######"+ dev.getAddress());
+            }
+        }
+    };*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detectar_beacons);
 
-        registerReceiver(receiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
+        /*mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        //Register the BroadcastReceiver
+        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+        registerReceiver(receiver, filter);*/
 
         //Chequeamos los permisos
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -68,7 +89,7 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
         //Inicializamos el Bluetooth
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
-        telephoneAddress = android.provider.Settings.Secure.getString(DetectarBeaconsActivity.this.getContentResolver(), "bluetooth_address");
+        //telephoneAddress = android.provider.Settings.Secure.getString(DetectarBeaconsActivity.this.getContentResolver(), "bluetooth_address");
 
 
         // Si el dispositivo no soporta Bluetooth, notificamos al usuario
@@ -94,6 +115,8 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
         /*listBeacons = new Beacon(DetectarBeaconsActivity.this.getLayoutInflater());
         setListAdapter(listBeacons);*/
         scanLeDevice(true);
+
+        //mBluetoothAdapter.startDiscovery();
 
     }
 
@@ -128,17 +151,19 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
 
     private void scanLeDevice(final boolean enable) {
         if (enable) {
-            //mBluetoothAdapter.stopLeScan(mLeScanCallback);
+            mBluetoothAdapter.stopLeScan(mLeScanCallback);
             manualScanning = true;
-            mBluetoothAdapter.startDiscovery();
+            mBluetoothAdapter.startLeScan(mLeScanCallback);
+            //mBluetoothAdapter.startDiscovery();
         } else {
             manualScanning = false;
-           // mBluetoothAdapter.stopLeScan(mLeScanCallback);
+            mBluetoothAdapter.stopLeScan(mLeScanCallback);
+
         }
         invalidateOptionsMenu();
     }
 
-    private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
+   private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
         @Override
         public void onLeScan(final BluetoothDevice device, final int rssi, final byte[] scanRecord) {
             runOnUiThread(new Runnable() {
@@ -154,25 +179,13 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
                         //listBeacons.addDevice(deviceAux);
                         //listBeacons.notifyDataSetChanged();
 
-                        System.out.print(device.getAddress().toString() + "Detectado");
+                        System.out.println(device.getAddress().toString() + "Detectado #########################################");
                     }}
             });
         }
     };
 
-    private final BroadcastReceiver receiver = new BroadcastReceiver(){
-        @Override
-        public void onReceive(Context context, Intent intent) {
 
-            String action = intent.getAction();
-            if(BluetoothDevice.ACTION_FOUND.equals(action)) {
-                int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
-                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
-
-                System.out.print(rssi + "Detectado "+ name);
-            }
-        }
-    };
 
     public static UUID getGuidFromByteArray(byte[] bytes) {
         ByteBuffer bb = ByteBuffer.wrap(bytes);
