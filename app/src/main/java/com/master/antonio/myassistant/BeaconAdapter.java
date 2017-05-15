@@ -4,13 +4,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-class Beacon extends BaseAdapter {
-    private ArrayList<Beacon> mLeDevices;
+class BeaconAdapter extends BaseAdapter {
+    private ArrayList<BeaconAdapter> mLeDevices;
     private LayoutInflater mInflator;
 
     private String mac;
@@ -20,13 +21,13 @@ class Beacon extends BaseAdapter {
     private int minor;
     private int txpw;
 
-    public Beacon(LayoutInflater layaoutInflater) {
+    public BeaconAdapter(LayoutInflater layaoutInflater) {
         super();
-        mLeDevices = new ArrayList<Beacon>();
+        mLeDevices = new ArrayList<BeaconAdapter>();
         mInflator = layaoutInflater;
     }
 
-    public Beacon(String mac, UUID uuid, int rrsi, int major, int minor, int txpw) {
+    public BeaconAdapter(String mac, UUID uuid, int rrsi, int major, int minor, int txpw) {
         this.mac = mac;
         this.uuid = uuid;
         this.rrsi = rrsi;
@@ -65,7 +66,7 @@ class Beacon extends BaseAdapter {
         return txpw;
     }
 
-    public void addDevice(Beacon device) {
+    public void addDevice(BeaconAdapter device) {
         boolean insert = false;
         for(int i=0;i<mLeDevices.size();i++){
             if(mLeDevices.get(i).getMac().equals(device.getMac())){
@@ -78,7 +79,7 @@ class Beacon extends BaseAdapter {
         }
     }
 
-    public Beacon getDevice(int position) {
+    public BeaconAdapter getDevice(int position) {
 
         return mLeDevices.get(position);
     }
@@ -114,16 +115,19 @@ class Beacon extends BaseAdapter {
             viewHolder.deviceAddress = (TextView) view.findViewById(R.id.device_address);
             viewHolder.deviceName = (TextView) view.findViewById(R.id.device_name);
             viewHolder.dataInfo =  (TextView) view.findViewById(R.id.data_Info);
+            viewHolder.icon = (ImageView) view.findViewById(R.id.imgIcono);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
 
 
-        Beacon device = mLeDevices.get(i);
+        BeaconAdapter device = mLeDevices.get(i);
         viewHolder.deviceName.setText(device.getMac());
         viewHolder.deviceAddress.setText("Major: " + device.getMajor() + " Minor: " + device.getMinor());
         viewHolder.dataInfo.setText("RSSI: " + device.getRrsi() + " TXPW " + device.getTxpw());
+        viewHolder.icon.setImageResource(R.mipmap.beacon);
+
 
         return view;
     }
@@ -132,6 +136,7 @@ class Beacon extends BaseAdapter {
         TextView deviceName;
         TextView deviceAddress;
         TextView dataInfo;
+        ImageView icon;
     }
 
 }

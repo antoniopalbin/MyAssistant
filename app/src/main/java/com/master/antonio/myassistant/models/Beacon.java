@@ -7,7 +7,7 @@ import com.activeandroid.annotation.Table;
 /**
  * Created by Antonio on 29/04/2017.
  */
-@Table(name = "Beacon")
+@Table(name = "BeaconAdapter")
 public class Beacon extends Model {
     @Column(name = "idBeacon")
     public String idBeacon;
