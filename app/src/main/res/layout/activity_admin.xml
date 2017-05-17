@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TabHost
@@ -16,10 +17,22 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:minHeight="?attr/actionBarSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+            </android.support.v7.widget.Toolbar>
+
             <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"/>
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
@@ -32,12 +45,25 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/fab"
+                        android:layout_width="71dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        app:backgroundTint="@color/colorSencudary"
+                        android:layout_gravity="bottom|end"
+                        app:fabSize="normal"
+                        app:elevation="6dp"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/add" />
+
                     <ListView
-                        android:id="@+id/ListBeacons"
+                        android:id="@+id/ListDispositivos"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true" />
+
 
                 </LinearLayout>
                 <LinearLayout
@@ -46,13 +72,14 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <ListView
-                        android:id="@+id/ListVideos"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true" />
 
+
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView" />
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>

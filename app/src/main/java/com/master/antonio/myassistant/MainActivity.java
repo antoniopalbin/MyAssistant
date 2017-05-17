@@ -61,17 +61,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             }
         });
 
-        Button button = (Button) findViewById(R.id.Prueba);
-
-        button.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                //startGestorOfActivity();
-                startPrueba();
-            }
-        });
-
 
 
     }
@@ -83,12 +72,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     private void  startGestorOfActivity(){
         Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
-
-    }
-
-    private void  startPrueba(){
-        Intent intent = new Intent(this, DetectarBeaconsActivity.class);
         startActivity(intent);
 
     }

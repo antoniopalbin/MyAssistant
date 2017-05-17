@@ -33,27 +33,9 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
 
     private BluetoothAdapter mBluetoothAdapter;
     private BeaconAdapter listBeacons;
-    private String telephoneAddress;
     private boolean manualScanning;
 
     ListView ListaBeacons;
-
-    /*private final BroadcastReceiver receiver = new BroadcastReceiver(){
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            String action = intent.getAction();
-            if(BluetoothDevice.ACTION_FOUND.equals(action)) {
-                int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
-                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
-
-                BluetoothDevice dev = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-
-
-                System.out.println("Detectado "+ name +" ##################################################" + rssi + "######"+ dev.getAddress());
-            }
-        }
-    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +43,6 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detectar_beacons);
 
         ListaBeacons = (ListView) findViewById(R.id.ListBeacons);
-
-        /*mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        //Register the BroadcastReceiver
-        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-        registerReceiver(receiver, filter);*/
 
         //Chequeamos los permisos
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -88,7 +65,6 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
         //Inicializamos el Bluetooth
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
-        telephoneAddress = android.provider.Settings.Secure.getString(DetectarBeaconsActivity.this.getContentResolver(), "bluetooth_address");
 
 
         // Si el dispositivo no soporta Bluetooth, notificamos al usuario
@@ -112,11 +88,8 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
         }
 
         listBeacons = new BeaconAdapter(DetectarBeaconsActivity.this.getLayoutInflater());
-        //setListAdapter(listBeacons);
         ListaBeacons.setAdapter(listBeacons);
         scanLeDevice(true);
-
-        //mBluetoothAdapter.startDiscovery();
 
     }
 
@@ -154,7 +127,6 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
             manualScanning = true;
             mBluetoothAdapter.startLeScan(mLeScanCallback);
-            //mBluetoothAdapter.startDiscovery();
         } else {
             manualScanning = false;
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
