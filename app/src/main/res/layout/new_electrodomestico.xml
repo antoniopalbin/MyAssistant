@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:padding="15dp"
+        android:progress="10" />
+
+
+
+    <ViewFlipper
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="49dp"
+                android:gravity="center_horizontal"
+                android:text="Datos del electrodoméstico"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView10"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="33dp"
+                android:text="Marca"
+                android:textColor="@android:color/black" />
+
+            <EditText
+                android:id="@+id/InputMarca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView10"
+                android:layout_marginStart="31dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/edit"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Marca" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/InputMarca"
+                android:layout_marginTop="31dp"
+                android:layout_toStartOf="@+id/InputMarca"
+                android:text="Modelo"
+                android:textColor="@android:color/black" />
+
+            <EditText
+                android:id="@+id/InputModelo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/InputMarca"
+                android:layout_below="@+id/InputMarca"
+                android:layout_marginTop="17dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Modelo" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="49dp"
+                android:gravity="center_horizontal"
+                android:text="Datos del vídeo tutorial"
+                android:textColor="@android:color/black"
+                android:textSize="24sp" />
+        </RelativeLayout>
+
+
+    </ViewFlipper>
+
+
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSencudary"
+        android:text="Retroceder"
+        android:textColor="@android:color/background_light"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/buttonNExt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="26dp"
+        android:background="@color/colorSencudary"
+        android:text="Siguiente"
+        android:textColor="@android:color/background_light"
+        android:layout_alignBaseline="@+id/buttonBack"
+        android:layout_alignBottom="@+id/buttonBack"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
