@@ -1,5 +1,6 @@
 package com.master.antonio.myassistant;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.activeandroid.ActiveAndroid;
 
 public class AdminActivity extends AppCompatActivity {
     TabHost tabs;
+    FloatingActionButton button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,15 +76,20 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-
         //Evento de añadir una nueva beacon
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        button = (FloatingActionButton) findViewById(R.id.addBeacon);
 
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                startAddNewBeacon();
             }
         });
+    }
+
+    private void  startAddNewBeacon(){
+        Intent intent = new Intent(this, AsociarBeaconDispositivo.class);
+        startActivity(intent);
     }
 
 }
