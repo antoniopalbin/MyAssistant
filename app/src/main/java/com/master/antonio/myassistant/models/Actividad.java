@@ -1,27 +1,29 @@
 package com.master.antonio.myassistant.models;
 
+import com.siimkinks.sqlitemagic.annotation.Id;
 import com.siimkinks.sqlitemagic.annotation.Table;
 
 import java.util.Date;
-
 /**
  * Created by Antonio on 29/04/2017.
  */
 @Table(persistAll = true)
 public class Actividad {
+    @Id(autoIncrement = true)
+    public long id;
     public String idActividad;
     public Date timestamp;
-    public String idBeacon;
+    public Beacon beacon;
 
     public Actividad() {
         super();
     }
 
-    public Actividad(String idActividad, Date timestamp, String idBeacon) {
+    public Actividad(String idActividad, Date timestamp, Beacon beacon) {
         super();
         this.idActividad = idActividad;
         this.timestamp = timestamp;
-        this.idBeacon = idBeacon;
+        this.beacon = beacon;
     }
 
     public String getIdActividad() {
@@ -40,11 +42,11 @@ public class Actividad {
         this.timestamp = timestamp;
     }
 
-    public String getIdBeacon() {
-        return idBeacon;
+    public Beacon getBeacon() {
+        return beacon;
     }
 
-    public void setIdBeacon(String idBeacon) {
-        this.idBeacon = idBeacon;
+    public void setBeacon(Beacon beacon) {
+        this.beacon = beacon;
     }
 }

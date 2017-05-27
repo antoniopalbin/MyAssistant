@@ -1,5 +1,6 @@
 package com.master.antonio.myassistant.models;
 
+import com.siimkinks.sqlitemagic.annotation.Id;
 import com.siimkinks.sqlitemagic.annotation.Table;
 
 /**
@@ -7,6 +8,8 @@ import com.siimkinks.sqlitemagic.annotation.Table;
  */
 @Table(persistAll = true)
 public class Video {
+    @Id(autoIncrement = true)
+    public long id;
     public String idVideo;
     public String titulo;
     public String idYoutube;

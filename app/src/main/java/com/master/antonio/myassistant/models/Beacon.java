@@ -3,6 +3,7 @@ package com.master.antonio.myassistant.models;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.siimkinks.sqlitemagic.annotation.Id;
 import com.siimkinks.sqlitemagic.annotation.Table;
 
 /**
@@ -10,6 +11,8 @@ import com.siimkinks.sqlitemagic.annotation.Table;
  */
 @Table(persistAll = true)
 public class Beacon {
+    @Id(autoIncrement = true)
+    public long id;
     public String idBeacon;
     public String estancia;
     public String descripcion;

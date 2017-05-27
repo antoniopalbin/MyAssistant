@@ -1,5 +1,6 @@
 package com.master.antonio.myassistant.models;
 
+import com.siimkinks.sqlitemagic.annotation.Id;
 import com.siimkinks.sqlitemagic.annotation.Table;
 
 /**
@@ -7,8 +8,10 @@ import com.siimkinks.sqlitemagic.annotation.Table;
  */
 @Table(persistAll = true)
 public class VideoBeacon {
-    public String idVideo;
-    public String idBeacon;
+    @Id(autoIncrement = true)
+    public long id;
+    public Video video;
+    public Beacon beacon;
     public String descripcion;
     public byte[] imagen;
 
@@ -16,28 +19,28 @@ public class VideoBeacon {
         super();
     }
 
-    public VideoBeacon(String idVideo, String idBeacon, String descripcion, byte[] imagen) {
+    public VideoBeacon(Video video, Beacon beacon, String descripcion, byte[] imagen) {
         super();
-        this.idVideo = idVideo;
-        this.idBeacon = idBeacon;
+        this.video = video;
+        this.beacon = beacon;
         this.descripcion = descripcion;
         this.imagen = imagen;
     }
 
-    public String getIdVideo() {
-        return idVideo;
+    public Video getVideo() {
+        return video;
     }
 
-    public void setIdVideo(String idVideo) {
-        this.idVideo = idVideo;
+    public void setVideo(String idVideo) {
+        this.video = video;
     }
 
-    public String getIdBeacon() {
-        return idBeacon;
+    public Beacon getIdBeacon() {
+        return beacon;
     }
 
-    public void setIdBeacon(String idBeacon) {
-        this.idBeacon = idBeacon;
+    public void setIdBeacon(Beacon beacon) {
+        this.beacon = beacon;
     }
 
     public String getDescripcion() {
