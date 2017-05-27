@@ -6,10 +6,10 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MyAssistantApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,25 +17,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity" android:configChanges="screenSize|orientation">
+        <activity
+            android:name=".activities.MainActivity"
+            android:configChanges="screenSize|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".AdminActivity" android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".activities.AdminActivity"
+            android:parentActivityName=".activities.MainActivity" />
 
-        <activity android:name=".RegisterActivity" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".VisualizarVideoActivity" android:configChanges="screenSize|orientation" />
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.VisualizarVideoActivity"
+            android:configChanges="screenSize|orientation" />
 
-        <activity android:name=".AsociarBeaconDispositivo" android:parentActivityName=".AdminActivity"/>
+        <activity android:name=".activities.DetectarBeaconsActivity" />
 
-        <activity android:name=".DetectarBeaconsActivity" />
 
-        <meta-data android:name="AA_DB_NAME" android:value="MyAssistant.db" />
-        <meta-data android:name="AA_DB_VERSION" android:value="5" />
-        <meta-data android:name="AA_MODELS" android:value="com.master.antonio.myassistant.models.Video, com.master.antonio.myassistant.models.Beacon, com.master.antonio.myassistant.models.VideoBeacon, com.master.antonio.myassistant.models.Aviso, com.master.antonio.myassistant.models.Actividad" />
     </application>
 
 </manifest>

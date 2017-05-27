@@ -2,21 +2,27 @@
 
 buildscript {
     repositories {
+        mavenLocal()
         jcenter()
+        maven {
+            url "http://dl.bintray.com/siimkinks/maven"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath 'com.siimkinks.sqlitemagic:sqlitemagic-plugin:0.11.0'
     }
 }
-
 allprojects {
     repositories {
+        mavenLocal()
         jcenter()
-        mavenCentral()
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven {
+            url "http://dl.bintray.com/siimkinks/maven"
+        }
     }
 }
 

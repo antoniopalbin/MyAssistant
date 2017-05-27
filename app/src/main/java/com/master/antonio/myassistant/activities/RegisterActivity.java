@@ -1,4 +1,4 @@
-package com.master.antonio.myassistant;
+package com.master.antonio.myassistant.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.master.antonio.myassistant.R;
 
 import java.util.ArrayList;
 

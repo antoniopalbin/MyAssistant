@@ -1,20 +1,58 @@
 package com.master.antonio.myassistant.models;
 
-import com.activeandroid.Model;
-import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
+import com.siimkinks.sqlitemagic.annotation.Table;
 
 /**
  * Created by Antonio on 29/04/2017.
  */
-@Table(name = "VideoBeacon")
-public class VideoBeacon extends Model {
-    @Column(name = "idVideo")
+@Table(persistAll = true)
+public class VideoBeacon {
     public String idVideo;
-    @Column(name = "idBeacon")
     public String idBeacon;
-    @Column(name = "descripcion")
     public String descripcion;
-    @Column(name = "imagen")
     public byte[] imagen;
+
+    public VideoBeacon() {
+        super();
+    }
+
+    public VideoBeacon(String idVideo, String idBeacon, String descripcion, byte[] imagen) {
+        super();
+        this.idVideo = idVideo;
+        this.idBeacon = idBeacon;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+    }
+
+    public String getIdVideo() {
+        return idVideo;
+    }
+
+    public void setIdVideo(String idVideo) {
+        this.idVideo = idVideo;
+    }
+
+    public String getIdBeacon() {
+        return idBeacon;
+    }
+
+    public void setIdBeacon(String idBeacon) {
+        this.idBeacon = idBeacon;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
 }

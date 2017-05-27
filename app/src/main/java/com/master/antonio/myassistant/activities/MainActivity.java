@@ -1,4 +1,4 @@
-package com.master.antonio.myassistant;
+package com.master.antonio.myassistant.activities;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -9,11 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 
-import com.activeandroid.ActiveAndroid;
+import com.master.antonio.myassistant.R;
+import com.siimkinks.sqlitemagic.SqliteMagic;
 
 import java.util.Calendar;
-
-import static android.R.attr.startYear;
 
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -26,8 +25,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Initializing Active Android
-        ActiveAndroid.initialize(this);
         setContentView(R.layout.activity_main);
         cont = this;
 

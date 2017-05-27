@@ -1,4 +1,4 @@
-package com.master.antonio.myassistant;
+package com.master.antonio.myassistant.fragments;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+import com.master.antonio.myassistant.R;
 
 /**
  * Created by anton on 28/03/2016.

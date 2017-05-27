@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TabHost
         android:id="@+id/tabhost"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,7 +55,7 @@
                         android:layout_marginRight="15dp"
                         android:layout_marginTop="10dp"
                         android:text="Notificar si..."
-                        android:theme="@style/SCBSwitch"/>
+                        android:theme="@style/SCBSwitch" />
 
                     <Switch
                         android:id="@+id/Regla2"
@@ -65,7 +66,7 @@
                         android:layout_marginRight="15dp"
                         android:layout_marginTop="10dp"
                         android:text="Notificar si..."
-                        android:theme="@style/SCBSwitch"/>
+                        android:theme="@style/SCBSwitch" />
 
                     <Switch
                         android:id="@+id/Regla3"
@@ -76,12 +77,12 @@
                         android:layout_marginRight="15dp"
                         android:layout_marginTop="10dp"
                         android:text="Notificar si..."
-                        android:theme="@style/SCBSwitch"/>
+                        android:theme="@style/SCBSwitch" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@android:color/darker_gray"/>
+                        android:background="@android:color/darker_gray" />
 
                     <CheckBox
                         android:id="@+id/checkBox"
@@ -106,11 +107,11 @@
                         android:textColor="@android:color/black" />
 
                     <ListView
+                        android:id="@+id/ListCuentas"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:id="@+id/ListCuentas"/>
+                        android:paddingRight="15dp" />
 
 
                 </LinearLayout>
@@ -121,6 +122,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
 
                     <android.support.design.widget.CoordinatorLayout
                         android:id="@+id/main_content"
@@ -142,9 +144,11 @@
                         <ListView
                             android:id="@+id/ListBeacons"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true" />
                     </android.support.design.widget.CoordinatorLayout>
+
 
                 </LinearLayout>
             </FrameLayout>

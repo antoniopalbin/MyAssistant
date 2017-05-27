@@ -1,17 +1,11 @@
-package com.master.antonio.myassistant;
+package com.master.antonio.myassistant.activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
-import com.google.android.youtube.player.YouTubeBaseActivity;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerFragment;
-import com.google.android.youtube.player.YouTubePlayerView;
-
+import com.master.antonio.myassistant.R;
+import com.master.antonio.myassistant.fragments.YouTubeFragment;
 
 
 /**

@@ -1,8 +1,7 @@
-package com.master.antonio.myassistant;
+package com.master.antonio.myassistant.activities;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
@@ -17,6 +16,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+
+import com.master.antonio.myassistant.adapters.BeaconAdapter;
+import com.master.antonio.myassistant.R;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
@@ -135,7 +137,7 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
         invalidateOptionsMenu();
     }
 
-   private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
+    private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
         @Override
         public void onLeScan(final BluetoothDevice device, final int rssi, final byte[] scanRecord) {
             runOnUiThread(new Runnable() {
@@ -147,16 +149,16 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
                         int major = (scanRecord[25] & 0xff) * 0x100 + (scanRecord[26] & 0xff);
                         int minor = (scanRecord[27] & 0xff) * 0x100 + (scanRecord[28] & 0xff);
                         byte txpw = scanRecord[29];
-                        final BeaconAdapter deviceAux = new BeaconAdapter(device.getAddress(),uuid,rssi,major,minor,txpw);
+                        final BeaconAdapter deviceAux = new BeaconAdapter(device.getAddress(), uuid, rssi, major, minor, txpw);
                         listBeacons.addDevice(deviceAux);
                         listBeacons.notifyDataSetChanged();
 
                         System.out.println(device.getAddress().toString() + "Detectado #########################################");
-                    }}
+                    }
+                }
             });
         }
     };
-
 
 
     public static UUID getGuidFromByteArray(byte[] bytes) {

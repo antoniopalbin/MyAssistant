@@ -1,4 +1,4 @@
-package com.master.antonio.myassistant;
+package com.master.antonio.myassistant.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +7,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.master.antonio.myassistant.R;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
-class BeaconAdapter extends BaseAdapter {
+public class BeaconAdapter extends BaseAdapter {
     private ArrayList<BeaconAdapter> mLeDevices;
     private LayoutInflater mInflator;
 

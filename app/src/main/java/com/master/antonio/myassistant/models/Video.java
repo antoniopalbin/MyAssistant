@@ -1,26 +1,88 @@
 package com.master.antonio.myassistant.models;
 
-import com.activeandroid.Model;
-import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
+import com.siimkinks.sqlitemagic.annotation.Table;
 
 /**
  * Created by Antonio on 29/04/2017.
  */
-@Table(name = "Video")
-public class Video extends Model{
-    @Column(name = "idVideo")
+@Table(persistAll = true)
+public class Video {
     public String idVideo;
-    @Column(name = "titulo")
     public String titulo;
-    @Column(name = "idYoutube")
     public String idYoutube;
-    @Column(name = "thumbnail")
     public byte[] thumbnail;
-    @Column(name = "transcripcion")
     public String transcripcion;
-    @Column(name = "marca")
     public String marca;
-    @Column(name = "modelo")
     public String modelo;
+
+    public String getIdVideo() {
+        return idVideo;
+    }
+
+    public Video() {
+        super();
+    }
+
+    public Video(String idVideo, String titulo, String idYoutube, byte[] thumbnail, String transcripcion, String marca, String modelo) {
+        super();
+        this.idVideo = idVideo;
+        this.titulo = titulo;
+        this.idYoutube = idYoutube;
+        this.thumbnail = thumbnail;
+        this.transcripcion = transcripcion;
+        this.marca = marca;
+        this.modelo = modelo;
+    }
+
+    public void setIdVideo(String idVideo) {
+        this.idVideo = idVideo;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getIdYoutube() {
+        return idYoutube;
+    }
+
+    public void setIdYoutube(String idYoutube) {
+        this.idYoutube = idYoutube;
+    }
+
+    public byte[] getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(byte[] thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public String getTranscripcion() {
+        return transcripcion;
+    }
+
+    public void setTranscripcion(String transcripcion) {
+        this.transcripcion = transcripcion;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
 }

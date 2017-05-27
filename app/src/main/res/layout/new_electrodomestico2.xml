@@ -84,7 +84,7 @@
                 <!-- YouTube Fragment -->
                 <fragment
                     android:id="@+id/fragment_youtube"
-                    android:name="com.master.antonio.myassistant.YouTubeFragment"
+                    android:name="com.master.antonio.myassistant.fragments.YouTubeFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/editText"
