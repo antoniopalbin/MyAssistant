@@ -51,7 +51,7 @@ public final class MyAssistantApp extends Application {
             beacons.add(new Beacon("4040404040", "Gimnasio", "gimnasio1", icono));
 
             for (Beacon b : beacons) {
-                b.insert().execute();
+                //b.insert().execute();
             }
         }
     }

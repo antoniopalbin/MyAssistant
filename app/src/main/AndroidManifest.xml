@@ -8,6 +8,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" />
+
     <application
         android:name=".MyAssistantApp"
         android:allowBackup="true"
@@ -33,6 +36,10 @@
         <activity
             android:name=".activities.RegisterActivity"
             android:parentActivityName=".activities.MainActivity" />
+
+        <activity android:name=".AsociarBeaconDispositivo"
+            android:parentActivityName=".activities.AdminActivity"/>
+
         <activity
             android:name=".activities.VisualizarVideoActivity"
             android:configChanges="screenSize|orientation" />
