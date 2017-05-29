@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,11 +26,14 @@ import org.codepond.wizardroid.WizardStep;
 
 public class Step3 extends WizardStep {
 
+    private Bitmap img;
+
     public static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int REQUEST_CAMERA = 1;
 
     SeekBar progress;
     FloatingActionButton cam;
+    Bitmap imageBitmap;
     ImageView thumbail;
 
     //You must have an empty constructor for every step
@@ -43,6 +47,12 @@ public class Step3 extends WizardStep {
 
         progress = (SeekBar) v.findViewById(R.id.seekBar);
         progress.setProgress(75);
+        progress.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
 
         cam = (FloatingActionButton) v.findViewById(R.id.fab);
 
@@ -88,16 +98,12 @@ public class Step3 extends WizardStep {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE ) {
             Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imageBitmap = (Bitmap) extras.get("data");
             thumbail.setImageBitmap(imageBitmap);
         }
     }
 
     private void bindDataFields() {
-        //Do some work
-        //...
-        //The values of these fields will be automatically stored in the wizard context
-        //and will be populated in the next steps only if the same field names are used.
-
+        img = imageBitmap;
     }
 }

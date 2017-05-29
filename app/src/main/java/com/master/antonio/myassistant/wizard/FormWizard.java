@@ -1,5 +1,11 @@
 package com.master.antonio.myassistant.wizard;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.widget.Button;
+
+import com.master.antonio.myassistant.R;
+
 import org.codepond.wizardroid.WizardFlow;
 import org.codepond.wizardroid.layouts.BasicWizardLayout;
 import org.codepond.wizardroid.persistence.ContextVariable;
@@ -9,19 +15,24 @@ import org.codepond.wizardroid.persistence.ContextVariable;
  */
 public class FormWizard extends BasicWizardLayout {
 
-    /**
-     * Tell WizarDroid that these are context variables and set default values.
-     * These values will be automatically bound to any field annotated with {@link ContextVariable}.
-     * NOTE: Context Variable names are unique and therefore must
-     * have the same name and type wherever you wish to use them.
-     */
     @ContextVariable
-    private String firstname = "WizarDroid";
+    private String Marca = "";
     @ContextVariable
-    private String lastname = "CondPond.org";
+    private String Modelo = "";
+    @ContextVariable
+    private String KeyVideo;
+    @ContextVariable
+    private Bitmap img;
+    @ContextVariable
+    private String manual= "";
+
+
 
     public FormWizard() {
         super();
+        setNextButtonText("Siguiente");
+        setBackButtonText("Atrás");
+        setFinishButtonText("Crear");
     }
 
     /*
@@ -43,11 +54,8 @@ public class FormWizard extends BasicWizardLayout {
      */
     @Override
     public void onWizardComplete() {
-        super.onWizardComplete();   //Make sure to first call the super method before anything else
-        //... Access context variables here before terminating the wizard
-        //...
-        //String fullname = firstname + lastname;
-        //Store the data in the DB or pass it back to the calling activity
+        super.onWizardComplete();
+
         getActivity().finish();     //Terminate the wizard
     }
 }
