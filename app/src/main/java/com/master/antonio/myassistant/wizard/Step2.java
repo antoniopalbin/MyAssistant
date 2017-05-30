@@ -1,7 +1,11 @@
 package com.master.antonio.myassistant.wizard;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -13,6 +17,7 @@ import com.master.antonio.myassistant.R;
 import com.master.antonio.myassistant.fragments.YouTubeFragment;
 
 import org.codepond.wizardroid.WizardStep;
+import org.codepond.wizardroid.persistence.ContextVariable;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,11 +28,15 @@ import java.util.regex.Pattern;
 
 public class Step2 extends WizardStep {
 
+    @ContextVariable
+    private String KeyVideo;
+
     SeekBar progress;
     YouTubeFragment fragment;
     ImageButton update;
     EditText InputUrl;
     String videoId;
+
 
     //You must have an empty constructor for every step
     public Step2() {
@@ -39,11 +48,19 @@ public class Step2 extends WizardStep {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.new_electrodomestico2, container, false);
 
-        fragment = (YouTubeFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_youtube);
-        //fragment.setVideoId("RjTSh0diNO4");
+        fragment = (YouTubeFragment) getChildFragmentManager().findFragmentById(R.id.fragment_youtube);
+        fragment.setVideoId("RjTSh0diNO4");
+
 
         progress = (SeekBar) v.findViewById(R.id.seekBar);
         progress.setProgress(50);
+
+        progress.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
 
         InputUrl = (EditText) v.findViewById(R.id.InputUrl);
 
@@ -83,16 +100,16 @@ public class Step2 extends WizardStep {
 
         if(matcher.find()){
             videoId = matcher.group();
+            fragment.setVideoId("RjTSh0diNO4");
+
         }
 
 
     }
 
     private void bindDataFields() {
-        //Do some work
-        //...
-        //The values of these fields will be automatically stored in the wizard context
-        //and will be populated in the next steps only if the same field names are used.
+
+        KeyVideo = videoId;
 
     }
 }
