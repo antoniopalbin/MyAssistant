@@ -1,5 +1,6 @@
 package com.master.antonio.myassistant.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -12,71 +13,67 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.master.antonio.myassistant.R;
+import com.master.antonio.myassistant.models.Actividad;
+import com.siimkinks.sqlitemagic.Select;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import rx.subscriptions.CompositeSubscription;
+
+import static com.siimkinks.sqlitemagic.ActividadTable.ACTIVIDAD;
+
 
 /**
  * Created by anton on 30/04/2017.
  */
 
 public class RegisterActivity extends AppCompatActivity {
-
-    private class Register {
-        private String titulo="Sin marca";
-        private String timestamp="Sin matricula";
-        private int icono=android
-                .R
-                .mipmap
-                .sym_def_app_icon;
-
-        public Register(){}
-
-        public Register(String titulo
-                , String timestamp
-                , int icono) {
-            this.titulo = titulo;
-            this.timestamp = timestamp;
-            this.icono = icono;
-        }
-
-        public String getTitulo() {
-            return titulo;
-        }
-
-        public String getTimestamp() {
-            return timestamp;
-        }
-
-        public int getIcono() {
-            return icono;
-        }
-    }
-
     private ListView ListRegister;
-    private ArrayList<Register> Registros = new ArrayList<Register>();
+    List<Actividad> Actividades;
+    private int dia;
+    private int mes;
+    private int año;
+    private Date fecha;
+    private CompositeSubscription subscriptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        //Añadimos registros de prueba
-        Registros.add(new Register("Cocina","01/05/2017 12:05",R.mipmap.cocina));
-        Registros.add(new Register("Salón","01/05/2017  13:50",R.mipmap.tv));
-        Registros.add(new Register("Dormitorio","01/05/2017 14:50",R.mipmap.dormitorio));
-        Registros.add(new Register("Baño","01/05/2017 17:50",R.mipmap.bano));
+        Intent intent = getIntent();
+        Bundle bd = intent.getExtras();
+        if (bd != null) {
+            String getName = (String) bd.get("name");
+
+            dia = (int) bd.get("dia");
+            mes = (int) bd.get("mes");
+            año = (int) bd.get("año");
+
+            fecha = new GregorianCalendar(año, mes, dia).getTime();
+        }
 
         showLVRegister_Complejo();
     }
 
     private void showLVRegister_Complejo() {
-        ListRegister=(ListView) findViewById(R.id.ListRegister);
+        ListRegister = (ListView) findViewById(R.id.ListRegister);
         ListRegister.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
 
-        ArrayAdapter adaptadorVehiculos=
-                new ArrayAdapter( this // Context
+        Date desde = new Date(fecha.getTime());
+        fecha.setHours(23);
+        fecha.setMinutes(59);
+        Date hasta = new Date(fecha.getTime());
+
+        Actividades = Select.from(ACTIVIDAD).where(ACTIVIDAD.TIMESTAMP.greaterThan(desde.getTime()).and(ACTIVIDAD.TIMESTAMP.lessThan(hasta.getTime()))).orderBy(ACTIVIDAD.TIMESTAMP.asc()).queryDeep().execute();
+
+        ArrayAdapter adaptadorVehiculos =
+                new ArrayAdapter(this // Context
                         , R.layout.registeritemlayout //Resource
-                        , Registros // Vector o lista
+                        , Actividades // Vector o lista
                 ) {
                     public View getView(int position
                             , View convertView
@@ -93,10 +90,12 @@ public class RegisterActivity extends AppCompatActivity {
                         TextView TextTime = (TextView) fila.findViewById(R.id.textTime);
 
                         // Establecemos los valores que queremos que muestren los widgets
-                        Register tmpV = Registros.get(position);
-                        iconoView.setImageResource(tmpV.getIcono());
-                        TextTitulo.setText(tmpV.getTitulo());
-                        TextTime.setText(tmpV.getTimestamp());
+                        Actividad tmpV = Actividades.get(position);
+                        iconoView.setImageResource(tmpV.getBeacon().getIcono());
+                        TextTitulo.setText(tmpV.getBeacon().getDescripcion());
+                        SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                        String dateText = df2.format(new Date(tmpV.getTimestamp()));
+                        TextTime.setText(dateText);
                         return fila;
                     }
                 };

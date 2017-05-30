@@ -16,13 +16,13 @@ public class Beacon {
     public String idBeacon;
     public String estancia;
     public String descripcion;
-    public byte[] icono;
+    public int icono;
 
     public Beacon() {
         super();
     }
 
-    public Beacon(String idBeacon, String estancia, String descripcion, byte[] icono) {
+    public Beacon(String idBeacon, String estancia, String descripcion, int icono) {
         super();
         this.idBeacon = idBeacon;
         this.estancia = estancia;
@@ -54,11 +54,11 @@ public class Beacon {
         this.descripcion = descripcion;
     }
 
-    public byte[] getIcono() {
+    public int getIcono() {
         return icono;
     }
 
-    public void setIcono(byte[] icono) {
+    public void setIcono(int icono) {
         this.icono = icono;
     }
 }

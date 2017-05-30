@@ -15,24 +15,20 @@ public class Aviso {
     public boolean tipoAviso2;
     public boolean tipoAviso3;
     public boolean notificarEmail;
-    public boolean notificarMovil;
-    public String email;
-    public String movil;
+    public String emails;
 
     public Aviso() {
         super();
     }
 
-    public Aviso(String idAviso, boolean tipoAviso1, boolean tipoAviso2, boolean tipoAviso3, boolean notificarEmail, boolean notificarMovil, String email, String movil) {
+    public Aviso(String idAviso, boolean tipoAviso1, boolean tipoAviso2, boolean tipoAviso3, boolean notificarEmail, String emails) {
         super();
         this.idAviso = idAviso;
         this.tipoAviso1 = tipoAviso1;
         this.tipoAviso2 = tipoAviso2;
         this.tipoAviso3 = tipoAviso3;
         this.notificarEmail = notificarEmail;
-        this.notificarMovil = notificarMovil;
-        this.email = email;
-        this.movil = movil;
+        this.emails = emails;
     }
 
     public String getIdAviso() {
@@ -67,35 +63,17 @@ public class Aviso {
         this.tipoAviso3 = tipoAviso3;
     }
 
-    public boolean isNotificarEmail() {
-        return notificarEmail;
-    }
+    public boolean isNotificarEmail() { return notificarEmail;     }
 
     public void setNotificarEmail(boolean notificarEmail) {
         this.notificarEmail = notificarEmail;
     }
 
-    public boolean isNotificarMovil() {
-        return notificarMovil;
+    public String getEmails() {
+        return emails;
     }
 
-    public void setNotificarMovil(boolean notificarMovil) {
-        this.notificarMovil = notificarMovil;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getMovil() {
-        return movil;
-    }
-
-    public void setMovil(String movil) {
-        this.movil = movil;
+    public void setEmails(String emails) {
+        this.emails = emails;
     }
 }

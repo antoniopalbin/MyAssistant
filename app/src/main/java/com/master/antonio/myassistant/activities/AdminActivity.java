@@ -27,9 +27,14 @@ import android.widget.Toast;
 import com.master.antonio.myassistant.AsociarBeaconDispositivo;
 import com.master.antonio.myassistant.R;
 import com.master.antonio.myassistant.models.Beacon;
+import com.siimkinks.sqlitemagic.Select;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.siimkinks.sqlitemagic.ActividadTable.ACTIVIDAD;
+import static com.siimkinks.sqlitemagic.BeaconTable.BEACON;
 
 /**
  * Created by anton on 30/04/2017.
@@ -39,7 +44,7 @@ public class AdminActivity extends AppCompatActivity {
     TabHost tabs;
     FloatingActionButton button;
 
-    ArrayList<Beacon> beacons;
+    List<Beacon> beacons;
     ListView lvBeacons;
 
     @Override
@@ -105,9 +110,6 @@ public class AdminActivity extends AppCompatActivity {
         });
 
         lvBeacons = (ListView) findViewById(R.id.ListBeacons);
-        //listBeacons = new Beacon();
-        //beaconsLV.setAdapter(listBeacons);
-        populateBeacons();
         showLVBeacons();
     }
 
@@ -116,36 +118,11 @@ public class AdminActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private int populateBeacons() {
-        Drawable drawable = getResources().getDrawable(R.mipmap.beacon);
-        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-        byte[] icono = stream.toByteArray();
-
-        beacons = new ArrayList<Beacon>();
-        beacons.add(new Beacon("1111111111", "Salón", "salon1", icono));
-        beacons.add(new Beacon("2222222222", "Cocina", "cocina1", icono));
-        beacons.add(new Beacon("3333333333", "Baño", "baño1", icono));
-        beacons.add(new Beacon("4444444444", "Baño", "baño2", icono));
-        beacons.add(new Beacon("5555555555", "Estar", "estar1", icono));
-        beacons.add(new Beacon("6666666666", "Cocina", "cocina2", icono));
-        beacons.add(new Beacon("7777777777", "Lavadero", "lavadero1", icono));
-        beacons.add(new Beacon("8888888888", "Dormitorio", "dormitorio1", icono));
-        beacons.add(new Beacon("9999999999", "Dormitorio", "dormitorio2", icono));
-        beacons.add(new Beacon("0000000000", "Dormitorio", "dormitorio3", icono));
-        beacons.add(new Beacon("1010101010", "Estudio", "estudio1", icono));
-        beacons.add(new Beacon("2020202020", "Despacho", "despacho1", icono));
-        beacons.add(new Beacon("3030303030", "Cochera", "cochera1", icono));
-        beacons.add(new Beacon("4040404040", "Gimnasio", "gimnasio1", icono));
-
-        return beacons.size();
-    }
-
     private void showLVBeacons() {
         lvBeacons = (ListView) findViewById(R.id.ListBeacons);
         lvBeacons.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+
+        beacons = Select.from(BEACON).orderBy(BEACON.ESTANCIA.asc(),BEACON.DESCRIPCION.asc()).queryDeep().execute();
 
         ArrayAdapter adaptadorBeacons =
                 new ArrayAdapter(this // Context
@@ -168,7 +145,7 @@ public class AdminActivity extends AppCompatActivity {
 
                         // Establecemos los valores que queremos que muestren los widgets
                         Beacon tmpB = beacons.get(position);
-                        iconoView.setImageBitmap(BitmapFactory.decodeByteArray(tmpB.getIcono(), 0, tmpB.getIcono().length));
+                        iconoView.setImageResource(tmpB.getIcono());
                         descripcionView.setText(tmpB.getDescripcion());
                         estanciaView.setText(tmpB.getEstancia());
                         return fila;

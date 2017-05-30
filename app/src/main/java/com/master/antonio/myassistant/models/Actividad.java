@@ -12,14 +12,14 @@ public class Actividad {
     @Id(autoIncrement = true)
     public long id;
     public String idActividad;
-    public Date timestamp;
+    public long timestamp;
     public Beacon beacon;
 
     public Actividad() {
         super();
     }
 
-    public Actividad(String idActividad, Date timestamp, Beacon beacon) {
+    public Actividad(String idActividad, long timestamp, Beacon beacon) {
         super();
         this.idActividad = idActividad;
         this.timestamp = timestamp;
@@ -34,11 +34,11 @@ public class Actividad {
         this.idActividad = idActividad;
     }
 
-    public Date getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 

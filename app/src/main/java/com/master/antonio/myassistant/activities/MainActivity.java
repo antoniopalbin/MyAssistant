@@ -13,14 +13,12 @@ import com.master.antonio.myassistant.R;
 import com.siimkinks.sqlitemagic.SqliteMagic;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-
     private DatePickerDialog datePickerDialog;
     private Context cont;
-    private int Day;
-    private int Mounth;
-    private int Year;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,20 +65,18 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         startActivity(intent);
     }
 
-    private void  startGestorOfActivity(){
+    private void  startGestorOfActivity(int year, int month, int dayOfMonth){
         Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
+        intent.putExtra("dia", dayOfMonth);
+        intent.putExtra("mes", month);
+        intent.putExtra("año", year);
 
+        startActivity(intent);
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        //Almacenamos la fecha seleccionada por el usuario
-        Day = dayOfMonth;
-        Mounth = month;
-        Year = year;
-
         //Lanzamos la actividad
-        startGestorOfActivity();
+        startGestorOfActivity(year, month, dayOfMonth);
     }
 }
