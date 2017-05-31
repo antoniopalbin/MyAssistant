@@ -44,7 +44,11 @@
             android:name=".activities.VisualizarVideoActivity"
             android:configChanges="screenSize|orientation" />
 
-        <activity android:name=".activities.DetectarBeaconsActivity" />
+        <activity android:name=".activities.DetectarBeaconsActivity"
+            android:parentActivityName=".activities.AdminActivity"/>
+
+        <activity android:name=".activities.ListDispositivosBeaconsActivity"
+            android:parentActivityName=".activities.AdminActivity"/>
 
 
     </application>

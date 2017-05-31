@@ -1,5 +1,6 @@
 package com.master.antonio.myassistant.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -47,11 +48,14 @@ public class AdminActivity extends AppCompatActivity {
     List<Beacon> beacons;
     ListView lvBeacons;
 
+    Context cont;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_admin);
+        cont = this;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
@@ -114,7 +118,7 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void startAddNewBeacon() {
-        Intent intent = new Intent(this, AsociarBeaconDispositivo.class);
+        Intent intent = new Intent(this, DetectarBeaconsActivity.class);
         startActivity(intent);
     }
 
@@ -152,20 +156,24 @@ public class AdminActivity extends AppCompatActivity {
                     }
                 };
         lvBeacons.setAdapter(adaptadorBeacons);
-//        lvBeacons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                SparseBooleanArray checked = lvBeacons.getCheckedItemPositions();
-//                if (checked == null) {
-//                    Toast.makeText(MainActivity.this, "Checked is null", Toast.LENGTH_LONG).show();
-//                    return;
-//                }
-//                String msg = "Items marcados: ";
-//                for (int i = 0; i < lvBeacons.getCount(); ++i) {
-//                    msg += (checked.get(i)) ? i + ", " : "";
-//                }
-//                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
+        lvBeacons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+               // SparseBooleanArray checked = lvBeacons.getCheckedItemPositions();
+
+                Intent intent = new Intent(cont, ListDispositivosBeaconsActivity.class);
+                intent.putExtra("IdBeacon", beacons.get(position).getIdBeacon());
+                /*if (checked == null) {
+                    Toast.makeText(AdminActivity.this, "Checked is null", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                String msg = "Items marcados: ";
+                for (int i = 0; i < lvBeacons.getCount(); ++i) {
+                    msg += (checked.get(i)) ? i + ", " : "";
+                }
+                Toast.makeText(AdminActivity.this, msg, Toast.LENGTH_SHORT).show();*/
+            }
+        });
     }
 }
