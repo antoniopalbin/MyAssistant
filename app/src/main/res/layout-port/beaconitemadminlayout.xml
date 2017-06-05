@@ -30,13 +30,5 @@
         android:text="Estancia"
         android:textSize="24sp" />
 
-    <ImageButton
-        android:id="@+id/imageMoreInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        app:srcCompat="@android:drawable/ic_menu_info_details"
-        android:layout_alignBottom="@+id/beacon_description" />
 
 </RelativeLayout>
