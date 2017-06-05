@@ -122,6 +122,13 @@ public class AdminActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void startListDispositivosBeacons(String idBeacon){
+        Intent intent = new Intent(this, ListDispositivosBeaconsActivity.class);
+        intent.putExtra("IdBeacon", idBeacon);
+        startActivity(intent);
+
+    }
+
     private void showLVBeacons() {
         lvBeacons = (ListView) findViewById(R.id.ListBeacons);
         lvBeacons.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
@@ -157,13 +164,17 @@ public class AdminActivity extends AppCompatActivity {
                 };
         lvBeacons.setAdapter(adaptadorBeacons);
 
+
         lvBeacons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                // SparseBooleanArray checked = lvBeacons.getCheckedItemPositions();
 
-                Intent intent = new Intent(cont, ListDispositivosBeaconsActivity.class);
-                intent.putExtra("IdBeacon", beacons.get(position).getIdBeacon());
+                //System.out.println("IdBeacon seleccionada: "+beacons.get(position).getIdBeacon());
+                //Intent intent = new Intent(cont, ListDispositivosBeaconsActivity.class);
+                startListDispositivosBeacons(beacons.get(position).getIdBeacon());
+                //intent.putExtra("IdBeacon", beacons.get(position).getIdBeacon());
+                //startActivity(intent);
                 /*if (checked == null) {
                     Toast.makeText(AdminActivity.this, "Checked is null", Toast.LENGTH_LONG).show();
                     return;
