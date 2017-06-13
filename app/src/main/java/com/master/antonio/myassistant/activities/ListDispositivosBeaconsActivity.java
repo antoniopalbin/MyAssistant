@@ -82,6 +82,7 @@ public class ListDispositivosBeaconsActivity extends AppCompatActivity {
 
     private void AsociarBeaconDispositivo(){
         Intent intent = new Intent(this, AsociarBeaconDispositivo.class);
+        intent.putExtra("IdBeacon", IdBeacon);
         startActivity(intent);
     }
 
@@ -91,11 +92,10 @@ public class ListDispositivosBeaconsActivity extends AppCompatActivity {
         ListDispositivos.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
 
 
-        //Dispositivos = Select.from().where(Dispositiv).queryDeep().execute();
         Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(IdBeacon)).takeFirst().execute();
         Dispositivos = Select.from(DISPOSITIVO).where(DISPOSITIVO.BEACON.is(aux)).execute();
 
-        ArrayAdapter adaptadorVehiculos =
+        ArrayAdapter adaptadorDispositivos =
                 new ArrayAdapter(this // Context
                         , R.layout.registeritemlayout //Resource
                         , Dispositivos // Vector o lista
@@ -125,7 +125,7 @@ public class ListDispositivosBeaconsActivity extends AppCompatActivity {
                     }
                 };
 
-        ListDispositivos.setAdapter(adaptadorVehiculos);
+        ListDispositivos.setAdapter(adaptadorDispositivos);
 
         /*ListRegister.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

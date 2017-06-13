@@ -28,7 +28,12 @@ public class Step1 extends WizardStep {
     private String Modelo;
     @ContextVariable
     private String KeyVideo;
-
+    @ContextVariable
+    private byte[] img;
+    @ContextVariable
+    private String Manual;
+    @ContextVariable
+    private byte[] thumbnail;
 
 
     SeekBar progress;
@@ -37,6 +42,7 @@ public class Step1 extends WizardStep {
 
     //You must have an empty constructor for every step
     public Step1() {
+
     }
 
     //Set your layout here
@@ -74,13 +80,12 @@ public class Step1 extends WizardStep {
     }
 
     private void bindDataFields() {
-        //Do some work
-        //...
-        //The values of these fields will be automatically stored in the wizard context
-        //and will be populated in the next steps only if the same field names are used.
 
         Marca = InputMarca.getText().toString();
         Modelo = InputModelo.getText().toString();
+
+        System.out.println("Marca "+ Marca);
+        System.out.println("Modelo "+ Modelo);
 
     }
 }

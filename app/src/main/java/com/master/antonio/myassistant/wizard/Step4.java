@@ -20,7 +20,17 @@ import org.codepond.wizardroid.persistence.ContextVariable;
 public class Step4 extends WizardStep {
 
     @ContextVariable
-    private String manual;
+    private String Marca;
+    @ContextVariable
+    private String Modelo;
+    @ContextVariable
+    private String KeyVideo;
+    @ContextVariable
+    private byte[] img;
+    @ContextVariable
+    private String Manual;
+    @ContextVariable
+    private byte[] thumbnail;
 
     SeekBar progress;
     EditText InputManual;
@@ -62,7 +72,7 @@ public class Step4 extends WizardStep {
     }
 
     private void bindDataFields() {
-        manual = InputManual.getText().toString();
+        Manual = InputManual.getText().toString();
 
     }
 }

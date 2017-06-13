@@ -5,10 +5,18 @@ import android.graphics.Color;
 import android.widget.Button;
 
 import com.master.antonio.myassistant.R;
+import com.master.antonio.myassistant.activities.ListDispositivosBeaconsActivity;
+import com.master.antonio.myassistant.models.Beacon;
+import com.master.antonio.myassistant.models.Dispositivo;
+import com.siimkinks.sqlitemagic.Select;
 
 import org.codepond.wizardroid.WizardFlow;
 import org.codepond.wizardroid.layouts.BasicWizardLayout;
 import org.codepond.wizardroid.persistence.ContextVariable;
+
+import java.util.ArrayList;
+
+import static com.siimkinks.sqlitemagic.BeaconTable.BEACON;
 
 /**
  * A sample to demonstrate a form in multiple steps.
@@ -16,15 +24,19 @@ import org.codepond.wizardroid.persistence.ContextVariable;
 public class FormWizard extends BasicWizardLayout {
 
     @ContextVariable
-    private String Marca = "";
+    private String Marca;
     @ContextVariable
-    private String Modelo = "";
+    private String Modelo;
     @ContextVariable
     private String KeyVideo;
     @ContextVariable
-    private Bitmap img;
+    private byte[] img;
     @ContextVariable
-    private String manual= "";
+    private String Manual;
+    @ContextVariable
+    private byte[] thumbnail;
+
+    private String IdBeacon;
 
 
 
@@ -34,6 +46,11 @@ public class FormWizard extends BasicWizardLayout {
         setBackButtonText("Atrás");
         setFinishButtonText("Crear");
     }
+
+    public void setIdBeacon(String _id){
+        IdBeacon = _id;
+    }
+
 
     /*
         You must override this method and create a wizard flow by
@@ -54,8 +71,23 @@ public class FormWizard extends BasicWizardLayout {
      */
     @Override
     public void onWizardComplete() {
-        super.onWizardComplete();
+
+        //Realizamos la insercción de la beacon
+        Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(IdBeacon)).takeFirst().execute();
+
+        System.out.println("Beacon id "+aux.getIdBeacon());
+        System.out.println("Marca "+ Marca);
+        System.out.println("Modelo "+ Modelo);
+        System.out.println("manual"+ Manual);
+
+
+        /*ArrayList<Dispositivo> dispositivos = new ArrayList<>();
+        Dispositivo dis = new Dispositivo("20", Marca, Modelo, KeyVideo, img, img, manual, aux);
+        dispositivos.add(dis);
+        Dispositivo.persist(dispositivos).ignoreNullValues().execute();*/
 
         getActivity().finish();     //Terminate the wizard
+
+
     }
 }

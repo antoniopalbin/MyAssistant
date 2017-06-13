@@ -19,6 +19,10 @@ import android.widget.SeekBar;
 import com.master.antonio.myassistant.R;
 
 import org.codepond.wizardroid.WizardStep;
+import org.codepond.wizardroid.persistence.ContextVariable;
+
+import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
 
 /**
  * Created by anton on 28/05/2017.
@@ -26,7 +30,18 @@ import org.codepond.wizardroid.WizardStep;
 
 public class Step3 extends WizardStep {
 
-    private Bitmap img;
+    @ContextVariable
+    private String Marca;
+    @ContextVariable
+    private String Modelo;
+    @ContextVariable
+    private String KeyVideo;
+    @ContextVariable
+    private byte[] img;
+    @ContextVariable
+    private String Manual;
+    @ContextVariable
+    private byte[] thumbnail;
 
     public static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int REQUEST_CAMERA = 1;
@@ -104,6 +119,13 @@ public class Step3 extends WizardStep {
     }
 
     private void bindDataFields() {
-        img = imageBitmap;
+        System.out.println("Probandoooooooo ");
+        //imageBitmap;
+        int bytes = imageBitmap.getByteCount();
+
+        ByteBuffer buffer = ByteBuffer.allocate(bytes);
+        imageBitmap.copyPixelsToBuffer(buffer);
+
+        img = buffer.array();
     }
 }

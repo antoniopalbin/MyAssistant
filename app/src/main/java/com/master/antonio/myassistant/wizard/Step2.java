@@ -29,7 +29,17 @@ import java.util.regex.Pattern;
 public class Step2 extends WizardStep {
 
     @ContextVariable
+    private String Marca;
+    @ContextVariable
+    private String Modelo;
+    @ContextVariable
     private String KeyVideo;
+    @ContextVariable
+    private byte[] img;
+    @ContextVariable
+    private String Manual;
+    @ContextVariable
+    private byte[] thumbnail;
 
     SeekBar progress;
     YouTubeFragment fragment;
@@ -108,8 +118,7 @@ public class Step2 extends WizardStep {
     }
 
     private void bindDataFields() {
-
+        System.out.println("Probandoooooooo ");
         KeyVideo = videoId;
-
     }
 }
