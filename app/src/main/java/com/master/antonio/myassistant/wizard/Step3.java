@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.ImageFormat;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import com.master.antonio.myassistant.R;
+import com.master.antonio.myassistant.models.Beacon;
 
 import org.codepond.wizardroid.WizardStep;
 import org.codepond.wizardroid.persistence.ContextVariable;
@@ -42,6 +44,8 @@ public class Step3 extends WizardStep {
     private String Manual;
     @ContextVariable
     private byte[] thumbnail;
+    @ContextVariable
+    private String IdBeacon;
 
     public static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int REQUEST_CAMERA = 1;
@@ -119,13 +123,8 @@ public class Step3 extends WizardStep {
     }
 
     private void bindDataFields() {
-        System.out.println("Probandoooooooo ");
-        //imageBitmap;
-        int bytes = imageBitmap.getByteCount();
-
-        ByteBuffer buffer = ByteBuffer.allocate(bytes);
-        imageBitmap.copyPixelsToBuffer(buffer);
-
-        img = buffer.array();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.JPEG,50,stream);
+        img = stream.toByteArray();
     }
 }

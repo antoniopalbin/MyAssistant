@@ -35,8 +35,9 @@ public class FormWizard extends BasicWizardLayout {
     private String Manual;
     @ContextVariable
     private byte[] thumbnail;
-
+    @ContextVariable
     private String IdBeacon;
+
 
 
 
@@ -45,10 +46,14 @@ public class FormWizard extends BasicWizardLayout {
         setNextButtonText("Siguiente");
         setBackButtonText("Atrás");
         setFinishButtonText("Crear");
+
+
     }
 
     public void setIdBeacon(String _id){
         IdBeacon = _id;
+        //Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(IdBeacon)).takeFirst().execute();
+        //beac = aux;
     }
 
 
@@ -71,23 +76,6 @@ public class FormWizard extends BasicWizardLayout {
      */
     @Override
     public void onWizardComplete() {
-
-        //Realizamos la insercción de la beacon
-        Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(IdBeacon)).takeFirst().execute();
-
-        System.out.println("Beacon id "+aux.getIdBeacon());
-        System.out.println("Marca "+ Marca);
-        System.out.println("Modelo "+ Modelo);
-        System.out.println("manual"+ Manual);
-
-
-        /*ArrayList<Dispositivo> dispositivos = new ArrayList<>();
-        Dispositivo dis = new Dispositivo("20", Marca, Modelo, KeyVideo, img, img, manual, aux);
-        dispositivos.add(dis);
-        Dispositivo.persist(dispositivos).ignoreNullValues().execute();*/
-
         getActivity().finish();     //Terminate the wizard
-
-
     }
 }

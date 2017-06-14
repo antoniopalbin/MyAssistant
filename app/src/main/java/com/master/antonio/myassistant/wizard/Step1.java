@@ -12,6 +12,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.master.antonio.myassistant.R;
+import com.master.antonio.myassistant.models.Beacon;
 
 import org.codepond.wizardroid.WizardStep;
 import org.codepond.wizardroid.persistence.ContextVariable;
@@ -34,6 +35,8 @@ public class Step1 extends WizardStep {
     private String Manual;
     @ContextVariable
     private byte[] thumbnail;
+    @ContextVariable
+    private String IdBeacon;
 
 
     SeekBar progress;

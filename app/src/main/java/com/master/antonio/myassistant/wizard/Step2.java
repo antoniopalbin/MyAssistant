@@ -1,6 +1,7 @@
 package com.master.antonio.myassistant.wizard;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.master.antonio.myassistant.R;
 import com.master.antonio.myassistant.fragments.YouTubeFragment;
+import com.master.antonio.myassistant.models.Beacon;
 
 import org.codepond.wizardroid.WizardStep;
 import org.codepond.wizardroid.persistence.ContextVariable;
@@ -40,6 +42,8 @@ public class Step2 extends WizardStep {
     private String Manual;
     @ContextVariable
     private byte[] thumbnail;
+    @ContextVariable
+    private String IdBeacon;
 
     SeekBar progress;
     YouTubeFragment fragment;
@@ -58,10 +62,6 @@ public class Step2 extends WizardStep {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.new_electrodomestico2, container, false);
 
-        fragment = (YouTubeFragment) getChildFragmentManager().findFragmentById(R.id.fragment_youtube);
-        fragment.setVideoId("RjTSh0diNO4");
-
-
         progress = (SeekBar) v.findViewById(R.id.seekBar);
         progress.setProgress(50);
 
@@ -73,6 +73,9 @@ public class Step2 extends WizardStep {
         });
 
         InputUrl = (EditText) v.findViewById(R.id.InputUrl);
+
+        fragment = (YouTubeFragment) getChildFragmentManager().findFragmentById(R.id.fragment_youtube);
+        fragment.setVideoId(videoId);
 
         update = (ImageButton) v.findViewById(R.id.imageButton);
         update.setImageResource(R.drawable.update);
@@ -103,6 +106,7 @@ public class Step2 extends WizardStep {
         }
     }
 
+
     private void setVideo(String url){
         String pattern = "(?<=watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*";
         Pattern compiledPattern = Pattern.compile(pattern);
@@ -110,15 +114,12 @@ public class Step2 extends WizardStep {
 
         if(matcher.find()){
             videoId = matcher.group();
-            fragment.setVideoId("RjTSh0diNO4");
-
         }
 
 
     }
 
     private void bindDataFields() {
-        System.out.println("Probandoooooooo ");
         KeyVideo = videoId;
     }
 }

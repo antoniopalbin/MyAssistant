@@ -1,17 +1,28 @@
 package com.master.antonio.myassistant.wizard;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import com.master.antonio.myassistant.R;
+import com.master.antonio.myassistant.models.Beacon;
+import com.master.antonio.myassistant.models.Dispositivo;
+import com.siimkinks.sqlitemagic.Select;
 
 import org.codepond.wizardroid.WizardStep;
 import org.codepond.wizardroid.persistence.ContextVariable;
+
+import java.util.ArrayList;
+
+import static com.siimkinks.sqlitemagic.BeaconTable.BEACON;
 
 /**
  * Created by anton on 28/05/2017.
@@ -31,6 +42,8 @@ public class Step4 extends WizardStep {
     private String Manual;
     @ContextVariable
     private byte[] thumbnail;
+    @ContextVariable
+    private String IdBeacon;
 
     SeekBar progress;
     EditText InputManual;
@@ -55,7 +68,6 @@ public class Step4 extends WizardStep {
         });
         InputManual = (EditText) v.findViewById(R.id.InputManual);
 
-
         return v;
     }
 
@@ -74,5 +86,12 @@ public class Step4 extends WizardStep {
     private void bindDataFields() {
         Manual = InputManual.getText().toString();
 
+        //realizamos la inserccion del dispositivo
+        Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(IdBeacon)).takeFirst().execute();
+        System.out.println("Beacon"+ aux.getIdBeacon());
+
+        ArrayList<Dispositivo> dispositivos = new ArrayList<>();
+        dispositivos.add(new Dispositivo("30", Marca, Modelo, KeyVideo, img, img, Manual, aux));
+        Dispositivo.persist(dispositivos).ignoreNullValues().execute();
     }
 }

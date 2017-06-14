@@ -86,6 +86,12 @@ public class ListDispositivosBeaconsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        showLVRegister_Complejo();
+
+    }
 
     private void showLVRegister_Complejo() {
         ListDispositivos = (ListView) findViewById(R.id.ListDispositivoBeacon);
