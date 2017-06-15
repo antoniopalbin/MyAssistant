@@ -15,14 +15,22 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.master.antonio.myassistant.adapters.BeaconAdapter;
 import com.master.antonio.myassistant.R;
+import com.master.antonio.myassistant.models.Beacon;
+import com.master.antonio.myassistant.models.Dispositivo;
+import com.siimkinks.sqlitemagic.Select;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
+
+import static com.siimkinks.sqlitemagic.BeaconTable.BEACON;
 
 /**
  * Created by anton on 13/05/2017.
@@ -93,6 +101,33 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
         ListaBeacons.setAdapter(listBeacons);
         scanLeDevice(true);
 
+        ListaBeacons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                // SparseBooleanArray checked = lvBeacons.getCheckedItemPositions();
+
+                //System.out.println("IdBeacon seleccionada: "+beacons.get(position).getIdBeacon());
+                //Intent intent = new Intent(cont, ListDispositivosBeaconsActivity.class);
+                startListDispositivosBeacons(listBeacons.getDevice(position).getMac().toString());
+                //intent.putExtra("IdBeacon", beacons.get(position).getIdBeacon());
+                //startActivity(intent);
+                /*if (checked == null) {
+                    Toast.makeText(AdminActivity.this, "Checked is null", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                String msg = "Items marcados: ";
+                for (int i = 0; i < lvBeacons.getCount(); ++i) {
+                    msg += (checked.get(i)) ? i + ", " : "";
+                }
+                Toast.makeText(AdminActivity.this, msg, Toast.LENGTH_SHORT).show();*/
+            }
+        });
+    }
+
+    private void startListDispositivosBeacons(String idBeacon){
+        Intent intent = new Intent(this, AddBeaconActivity.class);
+        intent.putExtra("IdBeacon", idBeacon);
+        startActivity(intent);
     }
 
     @Override
@@ -150,10 +185,13 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
                         int minor = (scanRecord[27] & 0xff) * 0x100 + (scanRecord[28] & 0xff);
                         byte txpw = scanRecord[29];
                         final BeaconAdapter deviceAux = new BeaconAdapter(device.getAddress(), uuid, rssi, major, minor, txpw);
-                        listBeacons.addDevice(deviceAux);
-                        listBeacons.notifyDataSetChanged();
 
-                        System.out.println(device.getAddress().toString() + "Detectado #########################################");
+                        Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(device.getAddress().toString())).takeFirst().execute();
+                        if(aux == null) {
+                            listBeacons.addDevice(deviceAux);
+                            listBeacons.notifyDataSetChanged();
+                            System.out.println(device.getAddress().toString() + "Detectado #########################################");
+                        }
                     }
                 }
             });

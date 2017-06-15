@@ -50,6 +50,10 @@
         <activity android:name=".activities.ListDispositivosBeaconsActivity"
             android:parentActivityName=".activities.AdminActivity"/>
 
+        <activity
+            android:name=".activities.AddBeaconActivity"
+            android:parentActivityName=".activities.ListDispositivosBeaconsActivity" />
+
 
     </application>
 
