@@ -1,11 +1,9 @@
 package com.master.antonio.myassistant.wizard;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.ImageFormat;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -18,19 +16,17 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import com.master.antonio.myassistant.R;
-import com.master.antonio.myassistant.models.Beacon;
 
 import org.codepond.wizardroid.WizardStep;
 import org.codepond.wizardroid.persistence.ContextVariable;
 
 import java.io.ByteArrayOutputStream;
-import java.nio.ByteBuffer;
 
 /**
  * Created by anton on 28/05/2017.
  */
 
-public class Step3 extends WizardStep {
+public class AsociarStep3 extends WizardStep {
 
     @ContextVariable
     private String Marca;
@@ -56,13 +52,15 @@ public class Step3 extends WizardStep {
     ImageView thumbail;
 
     //You must have an empty constructor for every step
-    public Step3() {
+    public AsociarStep3() {
     }
 
     //Set your layout here
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.new_electrodomestico3, container, false);
+
+        imageBitmap = null;
 
         progress = (SeekBar) v.findViewById(R.id.seekBar);
         progress.setProgress(75);
@@ -86,7 +84,7 @@ public class Step3 extends WizardStep {
                     // Callback onRequestPermissionsResult interceptado na Activity MainActivity
                     ActivityCompat.requestPermissions(getActivity(),
                             new String[]{Manifest.permission.CAMERA},
-                            Step3.REQUEST_CAMERA);
+                            AsociarStep3.REQUEST_CAMERA);
                 }else{
                     dispatchTakePictureIntent();
                 }
@@ -123,8 +121,10 @@ public class Step3 extends WizardStep {
     }
 
     private void bindDataFields() {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        imageBitmap.compress(Bitmap.CompressFormat.JPEG,50,stream);
-        img = stream.toByteArray();
+        if(imageBitmap != null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+            img = stream.toByteArray();
+        }
     }
 }

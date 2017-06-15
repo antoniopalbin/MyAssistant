@@ -44,6 +44,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        getSupportActionBar().setTitle("Resgistro de actividad");
+
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
         if (bd != null) {

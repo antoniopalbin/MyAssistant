@@ -2,16 +2,11 @@ package com.master.antonio.myassistant.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,18 +18,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.master.antonio.myassistant.AsociarBeaconDispositivo;
 import com.master.antonio.myassistant.R;
 import com.master.antonio.myassistant.models.Beacon;
 import com.siimkinks.sqlitemagic.Select;
 
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.siimkinks.sqlitemagic.ActividadTable.ACTIVIDAD;
 import static com.siimkinks.sqlitemagic.BeaconTable.BEACON;
 
 /**
@@ -168,22 +158,7 @@ public class AdminActivity extends AppCompatActivity {
         lvBeacons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-               // SparseBooleanArray checked = lvBeacons.getCheckedItemPositions();
-
-                //System.out.println("IdBeacon seleccionada: "+beacons.get(position).getIdBeacon());
-                //Intent intent = new Intent(cont, ListDispositivosBeaconsActivity.class);
                 startListDispositivosBeacons(beacons.get(position).getIdBeacon());
-                //intent.putExtra("IdBeacon", beacons.get(position).getIdBeacon());
-                //startActivity(intent);
-                /*if (checked == null) {
-                    Toast.makeText(AdminActivity.this, "Checked is null", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                String msg = "Items marcados: ";
-                for (int i = 0; i < lvBeacons.getCount(); ++i) {
-                    msg += (checked.get(i)) ? i + ", " : "";
-                }
-                Toast.makeText(AdminActivity.this, msg, Toast.LENGTH_SHORT).show();*/
             }
         });
     }

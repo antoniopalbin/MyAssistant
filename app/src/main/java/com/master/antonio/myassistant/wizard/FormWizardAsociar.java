@@ -1,27 +1,13 @@
 package com.master.antonio.myassistant.wizard;
 
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.widget.Button;
-
-import com.master.antonio.myassistant.R;
-import com.master.antonio.myassistant.activities.ListDispositivosBeaconsActivity;
-import com.master.antonio.myassistant.models.Beacon;
-import com.master.antonio.myassistant.models.Dispositivo;
-import com.siimkinks.sqlitemagic.Select;
-
 import org.codepond.wizardroid.WizardFlow;
 import org.codepond.wizardroid.layouts.BasicWizardLayout;
 import org.codepond.wizardroid.persistence.ContextVariable;
 
-import java.util.ArrayList;
-
-import static com.siimkinks.sqlitemagic.BeaconTable.BEACON;
-
 /**
  * A sample to demonstrate a form in multiple steps.
  */
-public class FormWizard extends BasicWizardLayout {
+public class FormWizardAsociar extends BasicWizardLayout {
 
     @ContextVariable
     private String Marca;
@@ -41,7 +27,7 @@ public class FormWizard extends BasicWizardLayout {
 
 
 
-    public FormWizard() {
+    public FormWizardAsociar() {
         super();
         setNextButtonText("Siguiente");
         setBackButtonText("Atrás");
@@ -64,10 +50,10 @@ public class FormWizard extends BasicWizardLayout {
     @Override
     public WizardFlow onSetup() {
         return new WizardFlow.Builder()
-                .addStep(Step1.class)
-                .addStep(Step2.class)
-                .addStep(Step3.class)
-                .addStep(Step4.class)
+                .addStep(AsociarStep1.class)
+                .addStep(AsociarStep2.class)
+                .addStep(AsociarStep3.class)
+                .addStep(AsociarStep4.class)
                 .create();
     }
 

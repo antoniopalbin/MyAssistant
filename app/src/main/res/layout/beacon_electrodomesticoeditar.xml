@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/form_wizard_fragment"
-        android:name="com.master.antonio.myassistant.wizard.FormWizardAsociar"
+        android:name="com.master.antonio.myassistant.wizard.FormWizardEditar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"

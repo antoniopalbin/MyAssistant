@@ -1,34 +1,34 @@
 package com.master.antonio.myassistant.wizard;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.master.antonio.myassistant.R;
+import com.master.antonio.myassistant.fragments.YouTubeFragment;
 import com.master.antonio.myassistant.models.Beacon;
-import com.master.antonio.myassistant.models.Dispositivo;
-import com.siimkinks.sqlitemagic.Select;
 
 import org.codepond.wizardroid.WizardStep;
 import org.codepond.wizardroid.persistence.ContextVariable;
 
-import java.util.ArrayList;
-
-import static com.siimkinks.sqlitemagic.BeaconTable.BEACON;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * Created by anton on 28/05/2017.
+ * Created by anton on 24/05/2017.
  */
 
-public class Step4 extends WizardStep {
+public class AsociarStep2 extends WizardStep {
 
     @ContextVariable
     private String Marca;
@@ -46,27 +46,50 @@ public class Step4 extends WizardStep {
     private String IdBeacon;
 
     SeekBar progress;
-    EditText InputManual;
+    YouTubeFragment fragment;
+    ImageButton update;
+    EditText InputUrl;
+    String videoId;
+
 
     //You must have an empty constructor for every step
-    public Step4() {
+    public AsociarStep2() {
     }
 
     //Set your layout here
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.new_electrodomestico4, container, false);
+        View v = inflater.inflate(R.layout.new_electrodomestico2, container, false);
 
         progress = (SeekBar) v.findViewById(R.id.seekBar);
-        progress.setProgress(100);
+        progress.setProgress(50);
+
         progress.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return true;
             }
         });
-        InputManual = (EditText) v.findViewById(R.id.InputManual);
+
+        InputUrl = (EditText) v.findViewById(R.id.InputUrl);
+
+        fragment = (YouTubeFragment) getChildFragmentManager().findFragmentById(R.id.fragment_youtube);
+        fragment.setVideoId(videoId);
+
+        update = (ImageButton) v.findViewById(R.id.imageButton);
+        update.setImageResource(R.drawable.update);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!InputUrl.getText().equals("")){
+                    setVideo(InputUrl.getText().toString());
+                }
+
+            }
+        });
+
+
 
         return v;
     }
@@ -83,15 +106,20 @@ public class Step4 extends WizardStep {
         }
     }
 
+
+    private void setVideo(String url){
+        String pattern = "(?<=watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*";
+        Pattern compiledPattern = Pattern.compile(pattern);
+        Matcher matcher = compiledPattern.matcher(url);
+
+        if(matcher.find()){
+            videoId = matcher.group();
+        }
+
+
+    }
+
     private void bindDataFields() {
-        Manual = InputManual.getText().toString();
-
-        //realizamos la inserccion del dispositivo
-        Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(IdBeacon)).takeFirst().execute();
-        System.out.println("Beacon"+ aux.getIdBeacon());
-
-        ArrayList<Dispositivo> dispositivos = new ArrayList<>();
-        dispositivos.add(new Dispositivo("30", Marca, Modelo, KeyVideo, img, img, Manual, aux));
-        Dispositivo.persist(dispositivos).ignoreNullValues().execute();
+        KeyVideo = videoId;
     }
 }

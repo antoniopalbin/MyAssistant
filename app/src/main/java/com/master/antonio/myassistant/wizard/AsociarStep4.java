@@ -1,27 +1,34 @@
 package com.master.antonio.myassistant.wizard;
 
-import android.graphics.Color;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.TextView;
 
 import com.master.antonio.myassistant.R;
 import com.master.antonio.myassistant.models.Beacon;
+import com.master.antonio.myassistant.models.Dispositivo;
+import com.siimkinks.sqlitemagic.Select;
 
 import org.codepond.wizardroid.WizardStep;
 import org.codepond.wizardroid.persistence.ContextVariable;
 
+import java.util.ArrayList;
+
+import static com.siimkinks.sqlitemagic.BeaconTable.BEACON;
+
 /**
- * Created by anton on 24/05/2017.
+ * Created by anton on 28/05/2017.
  */
 
-public class Step1 extends WizardStep {
+public class AsociarStep4 extends WizardStep {
 
     @ContextVariable
     private String Marca;
@@ -40,32 +47,27 @@ public class Step1 extends WizardStep {
 
 
     SeekBar progress;
-    EditText InputMarca;
-    EditText InputModelo;
+    EditText InputManual;
 
     //You must have an empty constructor for every step
-    public Step1() {
-
+    public AsociarStep4() {
     }
 
     //Set your layout here
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.new_electrodomestico1, container, false);
+        View v = inflater.inflate(R.layout.new_electrodomestico4, container, false);
 
         progress = (SeekBar) v.findViewById(R.id.seekBar);
-        progress.setProgress(25);
-
+        progress.setProgress(100);
         progress.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return true;
             }
         });
-
-        InputMarca = (EditText) v.findViewById(R.id.InputMarca);
-        InputModelo = (EditText) v.findViewById(R.id.InputModelo);
+        InputManual = (EditText) v.findViewById(R.id.InputManual);
 
         return v;
     }
@@ -83,12 +85,13 @@ public class Step1 extends WizardStep {
     }
 
     private void bindDataFields() {
+        Manual = InputManual.getText().toString();
 
-        Marca = InputMarca.getText().toString();
-        Modelo = InputModelo.getText().toString();
+        //realizamos la inserccion del dispositivo
+        Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(IdBeacon)).takeFirst().execute();
 
-        System.out.println("Marca "+ Marca);
-        System.out.println("Modelo "+ Modelo);
-
+        ArrayList<Dispositivo> dispositivos = new ArrayList<>();
+        dispositivos.add(new Dispositivo("30", Marca, Modelo, KeyVideo, img, img, Manual, aux));
+        Dispositivo.persist(dispositivos).ignoreNullValues().execute();
     }
 }
