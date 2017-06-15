@@ -52,6 +52,10 @@
         <activity android:name=".activities.EditarBeaconDispositivo"
             android:parentActivityName=".activities.ListDispositivosBeaconsActivity"/>
 
+        <activity
+            android:name=".activities.AddBeaconActivity"
+            android:parentActivityName=".activities.ListDispositivosBeaconsActivity" />
+
 
     </application>
 
