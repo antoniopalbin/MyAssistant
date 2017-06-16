@@ -1,5 +1,6 @@
 package com.master.antonio.myassistant.wizard;
 
+import com.master.antonio.myassistant.models.Beacon;
 import com.master.antonio.myassistant.models.Dispositivo;
 import com.siimkinks.sqlitemagic.Select;
 
@@ -28,6 +29,8 @@ public class FormWizardEditar extends BasicWizardLayout {
     private byte[] thumbnail;
     @ContextVariable
     private long IdDispositivo;
+    @ContextVariable
+    private String  IdBeacon;
 
     public FormWizardEditar() {
         super();
@@ -38,8 +41,9 @@ public class FormWizardEditar extends BasicWizardLayout {
 
     }
 
-    public void setIdDispositivo(String _id){
-        IdDispositivo = Long.parseLong(_id);
+    public void setIdDispositivo(String _idDispositivo, String _idBeacon){
+        IdDispositivo = Long.parseLong(_idDispositivo);
+        IdBeacon = _idBeacon;
         Dispositivo aux = Select.from(DISPOSITIVO).where(DISPOSITIVO.ID.is(IdDispositivo)).takeFirst().execute();
 
         Marca = aux.marca;
@@ -47,7 +51,6 @@ public class FormWizardEditar extends BasicWizardLayout {
         KeyVideo = aux.getIdYoutube();
         img = aux.getFoto();
         Manual = aux.getManual();
-
     }
 
 

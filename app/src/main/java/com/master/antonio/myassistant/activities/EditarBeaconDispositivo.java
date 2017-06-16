@@ -20,6 +20,7 @@ import static com.siimkinks.sqlitemagic.DispositivoTable.DISPOSITIVO;
 
 public class EditarBeaconDispositivo extends AppCompatActivity {
     public String IdDispositivo;
+    public String IdBeacon;
     private FormWizardEditar fragment;
 
     @Override
@@ -34,10 +35,11 @@ public class EditarBeaconDispositivo extends AppCompatActivity {
 
         if (bd != null) {
             IdDispositivo = (String) bd.get("IdDispositivo");
+            IdBeacon = (String) bd.get("IdBeacon");
         }
 
         fragment = (FormWizardEditar) getSupportFragmentManager().findFragmentById(R.id.form_wizard_fragment);
-        fragment.setIdDispositivo(IdDispositivo);
+        fragment.setIdDispositivo(IdDispositivo,IdBeacon);
     }
 
     @Override
@@ -51,6 +53,9 @@ public class EditarBeaconDispositivo extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_delete:
                 EliminarDispositivo();
+            case android.R.id.home:
+                onBackPressed();
+                break;
         }
         return true;
     }
@@ -59,5 +64,6 @@ public class EditarBeaconDispositivo extends AppCompatActivity {
         Delete.from(DISPOSITIVO).where(DISPOSITIVO.ID.is(Long.parseLong(IdDispositivo))).execute();
         fragment.onWizardComplete();
     }
+
 
 }

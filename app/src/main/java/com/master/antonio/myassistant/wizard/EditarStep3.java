@@ -43,6 +43,8 @@ public class EditarStep3 extends WizardStep {
     private byte[] thumbnail;
     @ContextVariable
     private long IdDispositivo;
+    @ContextVariable
+    private String  IdBeacon;
 
     public static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int REQUEST_CAMERA = 1;
@@ -129,7 +131,6 @@ public class EditarStep3 extends WizardStep {
 
     private void bindDataFields() {
         if(captura==true) {
-            System.out.println("Probando");
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
             img = stream.toByteArray();

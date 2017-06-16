@@ -14,8 +14,12 @@ import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -34,6 +38,12 @@ import static com.siimkinks.sqlitemagic.BeaconTable.BEACON;
 public class AdminActivity extends AppCompatActivity {
     TabHost tabs;
     FloatingActionButton button;
+    Switch Regla1;
+    Switch Regla2;
+    Switch Regla3;
+    CheckBox notificacion;
+    ListView cuentas;
+    Button AddCuenta;
 
     List<Beacon> beacons;
     ListView lvBeacons;
@@ -105,6 +115,57 @@ public class AdminActivity extends AppCompatActivity {
 
         lvBeacons = (ListView) findViewById(R.id.ListBeacons);
         showLVBeacons();
+
+        Regla1 = (Switch) findViewById(R.id.Regla1);
+        Regla1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+
+                }else{
+
+                }
+            }
+        });
+        Regla2 = (Switch) findViewById(R.id.Regla2);
+        Regla2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+
+                }else{
+
+                }
+            }
+        });
+
+        Regla3 = (Switch) findViewById(R.id.Regla3);
+        Regla3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+
+                }else{
+
+                }
+            }
+        });
+
+        notificacion = (CheckBox) findViewById(R.id.NotificacionEmail);
+        notificacion.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if(isChecked){
+
+                }else{
+
+                }
+            }
+        });
+
+        cuentas = (ListView) findViewById(R.id.ListCuentas);
+
+        AddCuenta = (Button) findViewById(R.id.AddCuenta);
+
     }
 
     private void startAddNewBeacon() {

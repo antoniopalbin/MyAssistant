@@ -44,7 +44,8 @@
                     android:id="@+id/tab2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:weightSum="1">
 
                     <Switch
                         android:id="@+id/Regla1"
@@ -85,7 +86,7 @@
                         android:background="@android:color/darker_gray" />
 
                     <CheckBox
-                        android:id="@+id/checkBox"
+                        android:id="@+id/NotificacionEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:button="@null"
@@ -109,9 +110,27 @@
                     <ListView
                         android:id="@+id/ListCuentas"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="122dp"
+                        android:layout_weight="1"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray" />
+
+
+                    <Button
+                        android:id="@+id/AddCuenta"
+                        android:layout_width="match_parent"
+                        android:layout_height="62dp"
+                        android:background="@android:color/white"
+                        android:drawableLeft="@drawable/addcuenta"
+                        android:drawablePadding="-190sp"
+                        android:paddingLeft="15sp"
+                        android:text="Añadir cuenta"
+                        android:textAllCaps="false"/>
 
 
                 </LinearLayout>

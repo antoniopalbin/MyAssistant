@@ -38,6 +38,8 @@ public class EditarStep2 extends WizardStep {
     private byte[] thumbnail;
     @ContextVariable
     private long IdDispositivo;
+    @ContextVariable
+    private String  IdBeacon;
 
     SeekBar progress;
     YouTubeFragment fragment;

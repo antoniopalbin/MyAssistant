@@ -33,6 +33,8 @@ public class EditarStep1 extends WizardStep {
     private byte[] thumbnail;
     @ContextVariable
     private long IdDispositivo;
+    @ContextVariable
+    private String  IdBeacon;
 
     SeekBar progress;
     EditText InputMarca;
@@ -81,7 +83,6 @@ public class EditarStep1 extends WizardStep {
     }
 
     private void bindDataFields() {
-
         Marca = InputMarca.getText().toString();
         Modelo = InputModelo.getText().toString();
     }

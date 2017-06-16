@@ -2,6 +2,7 @@ package com.master.antonio.myassistant.activities;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
@@ -51,6 +52,9 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detectar_beacons);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Nueva beacon");
 
         ListaBeacons = (ListView) findViewById(R.id.ListBeacons);
 
@@ -154,6 +158,9 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
                 break;
             case R.id.menu_stop:
                 scanLeDevice(false);
+                break;
+            case android.R.id.home:
+                onBackPressed();
                 break;
         }
         return true;

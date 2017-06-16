@@ -1,5 +1,7 @@
 package com.master.antonio.myassistant.wizard;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,6 +20,7 @@ import com.siimkinks.sqlitemagic.Update;
 import org.codepond.wizardroid.WizardStep;
 import org.codepond.wizardroid.persistence.ContextVariable;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import static com.siimkinks.sqlitemagic.BeaconTable.BEACON;
@@ -43,6 +46,9 @@ public class EditarStep4 extends WizardStep {
     private byte[] thumbnail;
     @ContextVariable
     private long IdDispositivo;
+    @ContextVariable
+    private String  IdBeacon;
+
     SeekBar progress;
     EditText InputManual;
 
@@ -85,8 +91,19 @@ public class EditarStep4 extends WizardStep {
 
     private void bindDataFields() {
         Manual = InputManual.getText().toString();
+
         //Modificamos el dispositivo
-        Update.table(DISPOSITIVO)
+
+        Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(IdBeacon)).takeFirst().execute();
+
+
+        Delete.from(DISPOSITIVO).where(DISPOSITIVO.ID.is(IdDispositivo)).execute();
+
+        ArrayList<Dispositivo> dispositivos = new ArrayList<>();
+        dispositivos.add(new Dispositivo("30", Marca, Modelo, KeyVideo, img, img, Manual, aux));
+        Dispositivo.persist(dispositivos).ignoreNullValues().execute();
+
+        /*Update.table(DISPOSITIVO)
                 .set(DISPOSITIVO.MARCA, Marca)
                 .set(DISPOSITIVO.MODELO, Modelo)
                 .set(DISPOSITIVO.ID_YOUTUBE, KeyVideo)
@@ -94,7 +111,7 @@ public class EditarStep4 extends WizardStep {
                 .set(DISPOSITIVO.THUMBNAIL, img)
                 .set(DISPOSITIVO.MANUAL, Manual)
                 .where(DISPOSITIVO.ID.is(IdDispositivo))
-                .execute();
+                .execute();*/
 
     }
 }

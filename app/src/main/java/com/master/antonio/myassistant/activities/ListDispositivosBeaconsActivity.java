@@ -93,6 +93,7 @@ public class ListDispositivosBeaconsActivity extends AppCompatActivity {
     public void editarDispositivo(String IDdisp){
         Intent intent = new Intent(this, EditarBeaconDispositivo.class);
         intent.putExtra("IdDispositivo", IDdisp);
+        intent.putExtra("IdBeacon", IdBeacon);
         startActivity(intent);
     }
 
@@ -154,6 +155,9 @@ public class ListDispositivosBeaconsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_editar:
                 EditarBeacon();
+            case android.R.id.home:
+                onBackPressed();
+                break;
         }
         return true;
     }

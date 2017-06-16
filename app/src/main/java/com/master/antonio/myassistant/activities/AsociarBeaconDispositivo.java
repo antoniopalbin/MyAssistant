@@ -3,6 +3,7 @@ package com.master.antonio.myassistant.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import com.master.antonio.myassistant.R;
 import com.master.antonio.myassistant.wizard.FormWizardAsociar;
@@ -32,5 +33,15 @@ public class AsociarBeaconDispositivo extends AppCompatActivity {
         fragment = (FormWizardAsociar) getSupportFragmentManager().findFragmentById(R.id.form_wizard_fragment);
         fragment.setIdBeacon(IdBeacon);
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return true;
+    }
+
 
 }
