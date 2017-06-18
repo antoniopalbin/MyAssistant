@@ -24,6 +24,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.master.antonio.myassistant.R;
+import com.master.antonio.myassistant.SendMail;
 import com.master.antonio.myassistant.models.Beacon;
 import com.siimkinks.sqlitemagic.Select;
 
@@ -62,6 +63,9 @@ public class AdminActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+        //enviarNotificacion("nazaaret345@gmail.com", "MyAssistan Notificación", "Probando" );
+
 
         //Configurar tabhost
         tabs = (TabHost) findViewById(R.id.tabhost);
@@ -222,5 +226,13 @@ public class AdminActivity extends AppCompatActivity {
                 startListDispositivosBeacons(beacons.get(position).getIdBeacon());
             }
         });
+    }
+
+    private void enviarNotificacion(String Email, String Subject, String Contenido ){
+        SendMail sm = new SendMail(this, Email, Subject, Contenido);
+
+        //Executing sendmail to send email
+        sm.execute();
+
     }
 }

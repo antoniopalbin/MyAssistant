@@ -10,14 +10,12 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/beacon_room"
         android:layout_below="@+id/beacon_room"
-        android:text="Descripción" />
+        android:text="Descripcion" />
 
     <ImageView
         android:id="@+id/imgIcono"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         app:srcCompat="@mipmap/beacon"
         android:layout_alignBottom="@+id/beacon_description" />
@@ -32,13 +30,5 @@
         android:text="Estancia"
         android:textSize="24sp" />
 
-    <ImageButton
-        android:id="@+id/imageMoreInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        app:srcCompat="@android:drawable/ic_menu_info_details"
-        android:layout_alignBottom="@+id/beacon_description" />
 
 </RelativeLayout>
