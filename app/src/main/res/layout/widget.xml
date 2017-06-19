@@ -16,15 +16,16 @@
             android:id="@+id/buttonWidget"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:scaleType="fitXY"
             android:background="@android:color/white"
-            android:src="@drawable/myassistant"/>
+            android:scaleType="fitXY"
+            android:src="@drawable/myassistant" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="¿Te ayudo?"
-            android:textSize="20dp"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20dp" />
 
 
     </LinearLayout>

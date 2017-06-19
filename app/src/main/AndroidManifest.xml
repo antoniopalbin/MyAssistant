@@ -7,8 +7,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-feature android:name="android.hardware.camera" />
 
     <application
@@ -19,53 +19,60 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".activities.MainActivity"
             android:configChanges="screenSize|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.AdminActivity"
             android:parentActivityName=".activities.MainActivity" />
-
         <activity
             android:name=".activities.RegisterActivity"
             android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.VisualizarVideoActivity"
             android:configChanges="screenSize|orientation" />
-
-        <activity android:name=".activities.DetectarBeaconsActivity"
-            android:parentActivityName=".activities.AdminActivity"/>
-
-        <activity android:name=".activities.ListDispositivosBeaconsActivity"
-            android:parentActivityName=".activities.AdminActivity"/>
-
-        <activity android:name=".activities.AsociarBeaconDispositivo"
-            android:parentActivityName=".activities.ListDispositivosBeaconsActivity"/>
-
-        <activity android:name=".activities.EditarBeaconDispositivo"
-            android:parentActivityName=".activities.ListDispositivosBeaconsActivity"/>
-
+        <activity
+            android:name=".activities.DetectarBeaconsActivity"
+            android:parentActivityName=".activities.AdminActivity" />
+        <activity
+            android:name=".activities.ListDispositivosBeaconsActivity"
+            android:parentActivityName=".activities.AdminActivity" />
+        <activity
+            android:name=".activities.AsociarBeaconDispositivo"
+            android:parentActivityName=".activities.ListDispositivosBeaconsActivity" />
+        <activity
+            android:name=".activities.EditarBeaconDispositivo"
+            android:parentActivityName=".activities.ListDispositivosBeaconsActivity" />
         <activity
             android:name=".activities.AddBeaconActivity"
             android:parentActivityName=".activities.ListDispositivosBeaconsActivity" />
 
-        <receiver android:name=".activities.Miwidget" android:label="My assistant">
+        <activity
+            android:name=".activities.EditBeaconActivity"
+            android:parentActivityName=".activities.EditarBeaconDispositivo" />
+
+        <receiver
+            android:name=".activities.Miwidget"
+            android:label="My assistant">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/mywidget" />
         </receiver>
 
-
+        <activity
+            android:name=".choose_device"
+            android:label="@string/title_activity_choose_device"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

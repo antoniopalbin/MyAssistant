@@ -6,13 +6,11 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,7 +21,6 @@ import android.widget.TextView;
 import com.master.antonio.myassistant.R;
 import com.master.antonio.myassistant.models.Beacon;
 import com.master.antonio.myassistant.models.Dispositivo;
-import com.siimkinks.sqlitemagic.Delete;
 import com.siimkinks.sqlitemagic.Select;
 
 import java.util.List;
@@ -36,13 +33,10 @@ import static com.siimkinks.sqlitemagic.DispositivoTable.DISPOSITIVO;
  */
 
 public class ListDispositivosBeaconsActivity extends AppCompatActivity {
-
     FloatingActionButton fab;
     ListView ListDispositivos;
-
     List<Dispositivo> Dispositivos;
     String IdBeacon;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +45,6 @@ public class ListDispositivosBeaconsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listdispositivobeacons);
 
         getSupportActionBar().setTitle("Dispositivos");
-
 
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
@@ -72,12 +65,10 @@ public class ListDispositivosBeaconsActivity extends AppCompatActivity {
         });
 
         showLVRegister_Complejo();
-
-
     }
 
 
-    private void AsociarBeaconDispositivo(){
+    private void AsociarBeaconDispositivo() {
         Intent intent = new Intent(this, AsociarBeaconDispositivo.class);
         intent.putExtra("IdBeacon", IdBeacon);
         startActivity(intent);
@@ -87,10 +78,9 @@ public class ListDispositivosBeaconsActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         showLVRegister_Complejo();
-
     }
 
-    public void editarDispositivo(String IDdisp){
+    public void editarDispositivo(String IDdisp) {
         Intent intent = new Intent(this, EditarBeaconDispositivo.class);
         intent.putExtra("IdDispositivo", IDdisp);
         intent.putExtra("IdBeacon", IdBeacon);
@@ -100,7 +90,6 @@ public class ListDispositivosBeaconsActivity extends AppCompatActivity {
     private void showLVRegister_Complejo() {
         ListDispositivos = (ListView) findViewById(R.id.ListDispositivoBeacon);
         ListDispositivos.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-
 
         Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(IdBeacon)).takeFirst().execute();
         Dispositivos = Select.from(DISPOSITIVO).where(DISPOSITIVO.BEACON.is(aux)).execute();
@@ -139,11 +128,12 @@ public class ListDispositivosBeaconsActivity extends AppCompatActivity {
 
         ListDispositivos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l){
-                editarDispositivo(Dispositivos.get(position).getId()+"");
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                editarDispositivo(Dispositivos.get(position).getId() + "");
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.editar_beacon, menu);
@@ -162,7 +152,9 @@ public class ListDispositivosBeaconsActivity extends AppCompatActivity {
         return true;
     }
 
-    public void EditarBeacon(){
+    public void EditarBeacon() {
+        Intent intent = new Intent(this, EditBeaconActivity.class);
+        intent.putExtra("IdBeacon", IdBeacon);
+        startActivity(intent);
     }
-
 }
