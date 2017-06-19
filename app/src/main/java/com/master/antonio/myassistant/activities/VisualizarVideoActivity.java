@@ -1,6 +1,7 @@
 package com.master.antonio.myassistant.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -12,7 +13,7 @@ import com.master.antonio.myassistant.fragments.YouTubeFragment;
  * Created by anton on 10/05/2017.
  */
 
-public class VisualizarVideoActivity extends AppCompatActivity{
+public class VisualizarVideoActivity extends AppCompatActivity {
 
     Context cont;
     String videoId;
@@ -29,10 +30,13 @@ public class VisualizarVideoActivity extends AppCompatActivity{
         fragment = (YouTubeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_youtube);
 
         //Prueba de visualización de video
-        videoId = "WkoKLmqYQUo";
+        //videoId = "WkoKLmqYQUo";
+
+        Intent intent = getIntent();
+        Bundle bdl = intent.getExtras();
+        if (bdl != null) {
+            videoId = (String) bdl.get("videoId");
+        }
         fragment.setVideoId(videoId);
-
-
     }
-
 }

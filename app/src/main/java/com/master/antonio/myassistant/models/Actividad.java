@@ -11,7 +11,6 @@ import java.util.Date;
 public class Actividad {
     @Id(autoIncrement = true)
     public long id;
-    public String idActividad;
     public long timestamp;
     public Beacon beacon;
 
@@ -19,19 +18,10 @@ public class Actividad {
         super();
     }
 
-    public Actividad(String idActividad, long timestamp, Beacon beacon) {
+    public Actividad(long timestamp, Beacon beacon) {
         super();
-        this.idActividad = idActividad;
         this.timestamp = timestamp;
         this.beacon = beacon;
-    }
-
-    public String getIdActividad() {
-        return idActividad;
-    }
-
-    public void setIdActividad(String idActividad) {
-        this.idActividad = idActividad;
     }
 
     public long getTimestamp() {

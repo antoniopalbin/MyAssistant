@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.master.antonio.myassistant.R;
-import com.master.antonio.myassistant.choose_device;
 
 /**
  * Created by anton on 16/06/2017.
@@ -26,7 +25,7 @@ public class Miwidget extends AppWidgetProvider {
 
 
             //Este intent deberia inciar la actividad principal de la secuencia de suaurio dependiente (cambiar VisualizarVideoActivity.class por otra nueva)
-            Intent intent = new Intent(context, choose_device.class);
+            Intent intent = new Intent(context, SelectDeviceAvailableActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);

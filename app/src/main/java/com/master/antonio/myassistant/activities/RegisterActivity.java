@@ -38,13 +38,15 @@ public class RegisterActivity extends AppCompatActivity {
     private int año;
     private Date fecha;
     private CompositeSubscription subscriptions;
+    String[] estancias = {"Baño", "Cocina", "Salón", "Dormitorio"};
+    int[] iconos = {R.mipmap.bano, R.mipmap.cocina,R.mipmap.tv,R.mipmap.dormitorio};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        getSupportActionBar().setTitle("Resgistro de actividad");
+        getSupportActionBar().setTitle("Registro de actividad");
 
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
@@ -72,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         Actividades = Select.from(ACTIVIDAD).where(ACTIVIDAD.TIMESTAMP.greaterThan(desde.getTime()).and(ACTIVIDAD.TIMESTAMP.lessThan(hasta.getTime()))).orderBy(ACTIVIDAD.TIMESTAMP.asc()).queryDeep().execute();
 
-        ArrayAdapter adaptadorVehiculos =
+        ArrayAdapter adaptadorBeacons =
                 new ArrayAdapter(this // Context
                         , R.layout.registeritemlayout //Resource
                         , Actividades // Vector o lista
@@ -102,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 };
 
-        ListRegister.setAdapter(adaptadorVehiculos);
+        ListRegister.setAdapter(adaptadorBeacons);
 
         /*ListRegister.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

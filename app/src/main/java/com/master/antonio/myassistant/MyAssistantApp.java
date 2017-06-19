@@ -54,19 +54,19 @@ public final class MyAssistantApp extends Application {
 
             //INSERT Actividades
             ArrayList<Actividad> actividades = new ArrayList<>();
-            actividades.add(new Actividad("1", new Date().getTime(), beacons.get(0)));
-            actividades.add(new Actividad("2", new Date().getTime(), beacons.get(4)));
-            actividades.add(new Actividad("3", new Date().getTime(), beacons.get(3)));
-            actividades.add(new Actividad("4", new Date().getTime(), beacons.get(0)));
-            actividades.add(new Actividad("5", new Date().getTime(), beacons.get(5)));
-            actividades.add(new Actividad("6", new Date().getTime(), beacons.get(6)));
-            actividades.add(new Actividad("7", new Date().getTime(), beacons.get(7)));
-            actividades.add(new Actividad("8", new Date().getTime(), beacons.get(6)));
-            actividades.add(new Actividad("9", new Date().getTime(), beacons.get(5)));
-            actividades.add(new Actividad("10", new Date().getTime(), beacons.get(2)));
-            actividades.add(new Actividad("11", new Date().getTime(), beacons.get(3)));
-            actividades.add(new Actividad("12", new Date().getTime(), beacons.get(2)));
-            actividades.add(new Actividad("13", new Date().getTime(), beacons.get(0)));
+            actividades.add(new Actividad(new Date().getTime(), beacons.get(0)));
+            actividades.add(new Actividad(new Date().getTime(), beacons.get(4)));
+            actividades.add(new Actividad(new Date().getTime(), beacons.get(3)));
+            actividades.add(new Actividad(new Date().getTime(), beacons.get(0)));
+            actividades.add(new Actividad(new Date().getTime(), beacons.get(5)));
+            actividades.add(new Actividad(new Date().getTime(), beacons.get(6)));
+            actividades.add(new Actividad(new Date().getTime(), beacons.get(7)));
+            actividades.add(new Actividad(new Date().getTime(), beacons.get(6)));
+            actividades.add(new Actividad(new Date().getTime(), beacons.get(5)));
+            actividades.add(new Actividad(new Date().getTime(), beacons.get(2)));
+            actividades.add(new Actividad(new Date().getTime(), beacons.get(3)));
+            actividades.add(new Actividad(new Date().getTime(), beacons.get(2)));
+            actividades.add(new Actividad(new Date().getTime(), beacons.get(0)));
             Actividad.persist(actividades).execute();
 
             //INSERT Dispositivos

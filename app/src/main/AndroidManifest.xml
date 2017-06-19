@@ -69,10 +69,11 @@
                 android:resource="@xml/mywidget" />
         </receiver>
 
+        <activity android:name=".activities.SelectDeviceAvailableActivity" />
+
         <activity
-            android:name=".choose_device"
-            android:label="@string/title_activity_choose_device"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".activities.VisualizarManualActivity"
+            android:parentActivityName=".activities.SelectDeviceAvailableActivity" />
     </application>
 
 </manifest>
