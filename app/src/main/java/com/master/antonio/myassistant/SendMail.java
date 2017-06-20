@@ -19,7 +19,7 @@ import javax.mail.internet.MimeMessage;
  * Created by anton on 18/06/2017.
  */
 
-public class SendMail extends AsyncTask<Void,Void,Void> {
+public class SendMail extends AsyncTask<Void, Void, Void> {
 
     //Declaring Variables
     private Context context;
@@ -34,7 +34,7 @@ public class SendMail extends AsyncTask<Void,Void,Void> {
     private ProgressDialog progressDialog;
 
     //Class Constructor
-    public SendMail(Context context, String email, String subject, String message){
+    public SendMail(Context context, String email, String subject, String message) {
         //Initializing variables
         this.context = context;
         this.email = email;
@@ -46,7 +46,7 @@ public class SendMail extends AsyncTask<Void,Void,Void> {
     protected void onPreExecute() {
         super.onPreExecute();
         //Showing progress dialog while sending email
-        progressDialog = ProgressDialog.show(context,"Enviando mensaje","Espere por favor...",false,false);
+        progressDialog = ProgressDialog.show(context, "Enviando mensaje", "Espere por favor...", false, false);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class SendMail extends AsyncTask<Void,Void,Void> {
         //Dismissing the progress dialog
         progressDialog.dismiss();
         //Showing a success message
-        Toast.makeText(context,"Mensaje Enviado",Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Mensaje Enviado", Toast.LENGTH_LONG).show();
     }
 
     @Override

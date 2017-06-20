@@ -9,8 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -27,12 +25,11 @@ import com.master.antonio.myassistant.adapters.GridViewAdapter;
 import com.master.antonio.myassistant.models.Actividad;
 import com.master.antonio.myassistant.models.Beacon;
 import com.master.antonio.myassistant.models.Dispositivo;
+import com.master.antonio.myassistant.utilities.MyAssistantUtilities;
 import com.siimkinks.sqlitemagic.Select;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -52,6 +49,7 @@ public class SelectDeviceAvailableActivity extends AppCompatActivity {
     private BluetoothAdapter mBluetoothAdapter;
     List<Dispositivo> dispositivos = new ArrayList<>();
     private boolean manualScanning;
+    Context ctx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +59,7 @@ public class SelectDeviceAvailableActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Dispositivos detectados");
 
+        ctx = this;
         //Chequeamos los permisos
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (this.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -117,16 +116,16 @@ public class SelectDeviceAvailableActivity extends AppCompatActivity {
                 Actividad actividad = new Actividad(new Date().getTime(), aux);
                 actividad.persist().execute();
 
-                if (item.getIdYoutube() != null && (conectadoRedMovil() || conectadoWifi())) {
+                if (item.getIdYoutube() != null && (MyAssistantUtilities.conectadoRedMovil(ctx) || MyAssistantUtilities.conectadoWifi(ctx))) {
                     //Create intent
-                    Intent intent = new Intent(SelectDeviceAvailableActivity.this, VisualizarVideoActivity.class);
+                    Intent intent = new Intent(SelectDeviceAvailableActivity.this, ViewVideoActivity.class);
                     intent.putExtra("videoId", item.getIdYoutube());
 
                     //Start details activity
                     startActivity(intent);
                 } else {
                     //Create intent
-                    Intent intent = new Intent(SelectDeviceAvailableActivity.this, VisualizarManualActivity.class);
+                    Intent intent = new Intent(SelectDeviceAvailableActivity.this, ViewManualActivity.class);
                     intent.putExtra("manual", item.getManual());
 
                     //Start details activity
@@ -176,8 +175,8 @@ public class SelectDeviceAvailableActivity extends AppCompatActivity {
         } else {
             manualScanning = false;
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
-
         }
+
         invalidateOptionsMenu();
     }
 
@@ -188,7 +187,7 @@ public class SelectDeviceAvailableActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     if (scanRecord[7] == 0x02 && scanRecord[8] == 0x15) {
-                        UUID uuid = getGuidFromByteArray(Arrays.copyOfRange(scanRecord, 9, 25));
+                        UUID uuid = MyAssistantUtilities.getGuidFromByteArray(Arrays.copyOfRange(scanRecord, 9, 25));
                         int major = (scanRecord[25] & 0xff) * 0x100 + (scanRecord[26] & 0xff);
                         int minor = (scanRecord[27] & 0xff) * 0x100 + (scanRecord[28] & 0xff);
                         byte txpw = scanRecord[29];
@@ -219,36 +218,4 @@ public class SelectDeviceAvailableActivity extends AppCompatActivity {
             });
         }
     };
-
-    public static UUID getGuidFromByteArray(byte[] bytes) {
-        ByteBuffer bb = ByteBuffer.wrap(bytes);
-        UUID uuid = new UUID(bb.getLong(), bb.getLong());
-        return uuid;
-    }
-
-    protected Boolean conectadoWifi() {
-        ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivity != null) {
-            NetworkInfo info = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-            if (info != null) {
-                if (info.isConnected()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    protected Boolean conectadoRedMovil() {
-        ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivity != null) {
-            NetworkInfo info = connectivity.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-            if (info != null) {
-                if (info.isConnected()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 }

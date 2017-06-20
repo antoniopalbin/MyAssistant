@@ -13,7 +13,7 @@ import com.master.antonio.myassistant.R;
  * Created by anton on 16/06/2017.
  */
 
-public class Miwidget extends AppWidgetProvider {
+public class MyWidgetActivity extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context,
@@ -23,8 +23,6 @@ public class Miwidget extends AppWidgetProvider {
         for (int i = 0; i < appWidgetIds.length; i++) {
             int appWidgetId = appWidgetIds[i];
 
-
-            //Este intent deberia inciar la actividad principal de la secuencia de suaurio dependiente (cambiar VisualizarVideoActivity.class por otra nueva)
             Intent intent = new Intent(context, SelectDeviceAvailableActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 

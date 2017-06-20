@@ -93,14 +93,12 @@ public class EditarStep4 extends WizardStep {
         Manual = InputManual.getText().toString();
 
         //Modificamos el dispositivo
-
         Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(IdBeacon)).takeFirst().execute();
-
 
         Delete.from(DISPOSITIVO).where(DISPOSITIVO.ID.is(IdDispositivo)).execute();
 
         ArrayList<Dispositivo> dispositivos = new ArrayList<>();
-        dispositivos.add(new Dispositivo("30", Marca, Modelo, KeyVideo, img, img, Manual, aux));
+        dispositivos.add(new Dispositivo(Marca, Modelo, KeyVideo, img, img, Manual, aux));
         Dispositivo.persist(dispositivos).ignoreNullValues().execute();
 
         /*Update.table(DISPOSITIVO)

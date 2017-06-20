@@ -90,7 +90,7 @@ public class AsociarStep4 extends WizardStep {
         //realizamos la inserccion del dispositivo
         Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(IdBeacon)).takeFirst().execute();
         ArrayList<Dispositivo> dispositivos = new ArrayList<>();
-        dispositivos.add(new Dispositivo("30", Marca, Modelo, KeyVideo, img, img, Manual, aux));
+        dispositivos.add(new Dispositivo(Marca, Modelo, KeyVideo, img, img, Manual, aux));
         Dispositivo.persist(dispositivos).ignoreNullValues().execute();
     }
 }

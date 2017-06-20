@@ -10,7 +10,6 @@ import com.siimkinks.sqlitemagic.annotation.Table;
 public class Dispositivo {
     @Id(autoIncrement = true)
     public long id;
-    public String idDispositivo;
     public String marca;
     public String modelo;
     public String idYoutube;
@@ -23,10 +22,9 @@ public class Dispositivo {
         super();
     }
 
-    public Dispositivo(String idDispositivo, String marca, String modelo, String idYoutube, byte[] thumbnail, byte[] foto, String manual, Beacon beacon){
+    public Dispositivo(String marca, String modelo, String idYoutube, byte[] thumbnail, byte[] foto, String manual, Beacon beacon) {
         super();
 
-        this.idDispositivo = idDispositivo;
         this.marca = marca;
         this.modelo = modelo;
         this.idYoutube = idYoutube;
@@ -42,14 +40,6 @@ public class Dispositivo {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getIdDispositivo() {
-        return idDispositivo;
-    }
-
-    public void setIdDispositivo(String idDispositivo) {
-        this.idDispositivo = idDispositivo;
     }
 
     public String getMarca() {

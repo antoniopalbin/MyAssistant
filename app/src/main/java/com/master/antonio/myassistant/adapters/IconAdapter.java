@@ -1,6 +1,5 @@
 package com.master.antonio.myassistant.adapters;
 
-
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,7 +21,7 @@ public class IconAdapter extends ArrayAdapter<String> {
     String[] estancias;
     int[] iconos;
 
-    public IconAdapter(Context ctx, String[] estancias, int[] iconos){
+    public IconAdapter(Context ctx, String[] estancias, int[] iconos) {
         super(ctx, R.layout.estanciaitemlayout, estancias);
 
         this.c = ctx;
@@ -32,7 +31,7 @@ public class IconAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if(convertView==null){
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.estanciaitemlayout, null);
         }
@@ -49,7 +48,7 @@ public class IconAdapter extends ArrayAdapter<String> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if(convertView==null){
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.estanciaitemlayout, null);
         }

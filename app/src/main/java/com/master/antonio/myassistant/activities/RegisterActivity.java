@@ -25,7 +25,6 @@ import rx.subscriptions.CompositeSubscription;
 
 import static com.siimkinks.sqlitemagic.ActividadTable.ACTIVIDAD;
 
-
 /**
  * Created by anton on 30/04/2017.
  */
@@ -38,8 +37,6 @@ public class RegisterActivity extends AppCompatActivity {
     private int año;
     private Date fecha;
     private CompositeSubscription subscriptions;
-    String[] estancias = {"Baño", "Cocina", "Salón", "Dormitorio"};
-    int[] iconos = {R.mipmap.bano, R.mipmap.cocina,R.mipmap.tv,R.mipmap.dormitorio};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +48,6 @@ public class RegisterActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
         if (bd != null) {
-            String getName = (String) bd.get("name");
-
             dia = (int) bd.get("dia");
             mes = (int) bd.get("mes");
             año = (int) bd.get("año");
@@ -105,21 +100,5 @@ public class RegisterActivity extends AppCompatActivity {
                 };
 
         ListRegister.setAdapter(adaptadorBeacons);
-
-        /*ListRegister.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                SparseBooleanArray checked = lvVehiculos.getCheckedItemPositions();
-                if (checked == null) {
-                    Toast.makeText(MainActivity.this, "Checked is null", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                String msg = "Items marcados: ";
-                for (int i = 0; i < lvVehiculos.getCount(); ++i) {
-                    msg += (checked.get(i)) ? i + ", " : "";
-                }
-                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-            }
-        });*/
     }
 }

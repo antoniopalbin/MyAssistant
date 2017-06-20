@@ -35,30 +35,30 @@
             android:name=".activities.RegisterActivity"
             android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".activities.VisualizarVideoActivity"
+            android:name=".activities.ViewVideoActivity"
             android:configChanges="screenSize|orientation" />
         <activity
-            android:name=".activities.DetectarBeaconsActivity"
+            android:name=".activities.SearchBeaconsActivity"
             android:parentActivityName=".activities.AdminActivity" />
         <activity
-            android:name=".activities.ListDispositivosBeaconsActivity"
+            android:name=".activities.ListBeaconDeviceActivity"
             android:parentActivityName=".activities.AdminActivity" />
         <activity
-            android:name=".activities.AsociarBeaconDispositivo"
-            android:parentActivityName=".activities.ListDispositivosBeaconsActivity" />
+            android:name=".activities.MatchBeaconDeviceActivity"
+            android:parentActivityName=".activities.ListBeaconDeviceActivity" />
         <activity
-            android:name=".activities.EditarBeaconDispositivo"
-            android:parentActivityName=".activities.ListDispositivosBeaconsActivity" />
+            android:name=".activities.EditBeaconDeviceActivity"
+            android:parentActivityName=".activities.ListBeaconDeviceActivity" />
         <activity
             android:name=".activities.AddBeaconActivity"
-            android:parentActivityName=".activities.ListDispositivosBeaconsActivity" />
+            android:parentActivityName=".activities.ListBeaconDeviceActivity" />
 
         <activity
             android:name=".activities.EditBeaconActivity"
-            android:parentActivityName=".activities.EditarBeaconDispositivo" />
+            android:parentActivityName=".activities.EditBeaconDeviceActivity" />
 
         <receiver
-            android:name=".activities.Miwidget"
+            android:name=".activities.MyWidgetActivity"
             android:label="My assistant">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -72,8 +72,9 @@
         <activity android:name=".activities.SelectDeviceAvailableActivity" />
 
         <activity
-            android:name=".activities.VisualizarManualActivity"
+            android:name=".activities.ViewManualActivity"
             android:parentActivityName=".activities.SelectDeviceAvailableActivity" />
+
     </application>
 
 </manifest>

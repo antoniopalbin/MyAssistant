@@ -2,7 +2,6 @@ package com.master.antonio.myassistant.activities;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
@@ -20,15 +19,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.master.antonio.myassistant.adapters.BeaconAdapter;
 import com.master.antonio.myassistant.R;
+import com.master.antonio.myassistant.adapters.BeaconAdapter;
 import com.master.antonio.myassistant.models.Beacon;
-import com.master.antonio.myassistant.models.Dispositivo;
+import com.master.antonio.myassistant.utilities.MyAssistantUtilities;
 import com.siimkinks.sqlitemagic.Select;
 
-import java.nio.ByteBuffer;
 import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 import static com.siimkinks.sqlitemagic.BeaconTable.BEACON;
@@ -37,8 +34,7 @@ import static com.siimkinks.sqlitemagic.BeaconTable.BEACON;
  * Created by anton on 13/05/2017.
  */
 
-public class DetectarBeaconsActivity extends AppCompatActivity {
-
+public class SearchBeaconsActivity extends AppCompatActivity {
     public static int REQUEST_BLUETOOTH = 1;
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
 
@@ -80,7 +76,6 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
 
-
         // Si el dispositivo no soporta Bluetooth, notificamos al usuario
         if (mBluetoothAdapter == null) {
             new AlertDialog.Builder(this)
@@ -101,34 +96,19 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
             startActivityForResult(enableBT, REQUEST_BLUETOOTH);
         }
 
-        listBeacons = new BeaconAdapter(DetectarBeaconsActivity.this.getLayoutInflater());
+        listBeacons = new BeaconAdapter(SearchBeaconsActivity.this.getLayoutInflater());
         ListaBeacons.setAdapter(listBeacons);
         scanLeDevice(true);
 
         ListaBeacons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // SparseBooleanArray checked = lvBeacons.getCheckedItemPositions();
-
-                //System.out.println("IdBeacon seleccionada: "+beacons.get(position).getIdBeacon());
-                //Intent intent = new Intent(cont, ListDispositivosBeaconsActivity.class);
                 startListDispositivosBeacons(listBeacons.getDevice(position).getMac().toString());
-                //intent.putExtra("IdBeacon", beacons.get(position).getIdBeacon());
-                //startActivity(intent);
-                /*if (checked == null) {
-                    Toast.makeText(AdminActivity.this, "Checked is null", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                String msg = "Items marcados: ";
-                for (int i = 0; i < lvBeacons.getCount(); ++i) {
-                    msg += (checked.get(i)) ? i + ", " : "";
-                }
-                Toast.makeText(AdminActivity.this, msg, Toast.LENGTH_SHORT).show();*/
             }
         });
     }
 
-    private void startListDispositivosBeacons(String idBeacon){
+    private void startListDispositivosBeacons(String idBeacon) {
         Intent intent = new Intent(this, AddBeaconActivity.class);
         intent.putExtra("IdBeacon", idBeacon);
         startActivity(intent);
@@ -174,8 +154,8 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
         } else {
             manualScanning = false;
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
-
         }
+
         invalidateOptionsMenu();
     }
 
@@ -185,16 +165,15 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-
                     if (scanRecord[7] == 0x02 && scanRecord[8] == 0x15) {
-                        UUID uuid = getGuidFromByteArray(Arrays.copyOfRange(scanRecord, 9, 25));
+                        UUID uuid = MyAssistantUtilities.getGuidFromByteArray(Arrays.copyOfRange(scanRecord, 9, 25));
                         int major = (scanRecord[25] & 0xff) * 0x100 + (scanRecord[26] & 0xff);
                         int minor = (scanRecord[27] & 0xff) * 0x100 + (scanRecord[28] & 0xff);
                         byte txpw = scanRecord[29];
                         final BeaconAdapter deviceAux = new BeaconAdapter(device.getAddress(), uuid, rssi, major, minor, txpw);
 
                         Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(device.getAddress().toString())).takeFirst().execute();
-                        if(aux == null) {
+                        if (aux == null) {
                             listBeacons.addDevice(deviceAux);
                             listBeacons.notifyDataSetChanged();
                             System.out.println(device.getAddress().toString() + "Detectado #########################################");
@@ -204,11 +183,4 @@ public class DetectarBeaconsActivity extends AppCompatActivity {
             });
         }
     };
-
-
-    public static UUID getGuidFromByteArray(byte[] bytes) {
-        ByteBuffer bb = ByteBuffer.wrap(bytes);
-        UUID uuid = new UUID(bb.getLong(), bb.getLong());
-        return uuid;
-    }
 }

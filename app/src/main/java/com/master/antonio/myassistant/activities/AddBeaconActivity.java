@@ -13,8 +13,7 @@ import android.widget.Toast;
 import com.master.antonio.myassistant.R;
 import com.master.antonio.myassistant.adapters.IconAdapter;
 import com.master.antonio.myassistant.models.Beacon;
-
-import java.util.GregorianCalendar;
+import com.master.antonio.myassistant.utilities.MyAssistantUtilities;
 
 /**
  * Created by Antonio on 15/06/2017.
@@ -26,9 +25,6 @@ public class AddBeaconActivity extends AppCompatActivity {
     EditText inputEstancia;
     int icono;
     Spinner sp;
-    String[] estancias = {"Baño", "Cocina", "Salón", "Dormitorio"};
-    int[] iconos = {R.mipmap.bano, R.mipmap.cocina,R.mipmap.tv,R.mipmap.dormitorio};
-
     String idBeacon;
 
     @Override
@@ -47,13 +43,13 @@ public class AddBeaconActivity extends AppCompatActivity {
         inputEstancia = (EditText) findViewById(R.id.InputEstancia);
         sp = (Spinner) findViewById(R.id.spinner);
 
-        IconAdapter adapter = new IconAdapter(this,estancias,iconos);
+        IconAdapter adapter = new IconAdapter(this, MyAssistantUtilities.getEstancias(), MyAssistantUtilities.getIconos());
         sp.setAdapter(adapter);
-        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                icono = iconos[position];
+                icono = MyAssistantUtilities.getIconos()[position];
             }
 
             @Override
@@ -70,7 +66,7 @@ public class AddBeaconActivity extends AppCompatActivity {
         });
     }
 
-    private void GuardarBeacon(){
+    private void GuardarBeacon() {
         Beacon beacon = new Beacon(idBeacon, inputEstancia.getText().toString(), inputDescripcion.getText().toString(), icono);
         beacon.insert().execute();
 

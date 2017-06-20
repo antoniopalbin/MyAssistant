@@ -12,7 +12,7 @@ import com.master.antonio.myassistant.wizard.FormWizardAsociar;
  * Created by anton on 24/05/2017.
  */
 
-public class AsociarBeaconDispositivo extends AppCompatActivity {
+public class MatchBeaconDeviceActivity extends AppCompatActivity {
     public String IdBeacon;
     private FormWizardAsociar fragment;
 
@@ -25,7 +25,6 @@ public class AsociarBeaconDispositivo extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
-
         if (bd != null) {
             IdBeacon = (String) bd.get("IdBeacon");
         }
@@ -33,6 +32,7 @@ public class AsociarBeaconDispositivo extends AppCompatActivity {
         fragment = (FormWizardAsociar) getSupportFragmentManager().findFragmentById(R.id.form_wizard_fragment);
         fragment.setIdBeacon(IdBeacon);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -42,6 +42,4 @@ public class AsociarBeaconDispositivo extends AppCompatActivity {
         }
         return true;
     }
-
-
 }

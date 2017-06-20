@@ -37,20 +37,17 @@ public final class MyAssistantApp extends Application {
 
             //INSERT Beacons
             ArrayList<Beacon> beacons = new ArrayList<Beacon>();
-            beacons.add(new Beacon("1111111111", "Salón", "salon1", R.mipmap.tv));
-            beacons.add(new Beacon("2222222222", "Cocina", "cocina1", R.mipmap.cocina));
-            beacons.add(new Beacon("3333333333", "Baño", "baño1", R.mipmap.bano));
-            beacons.add(new Beacon("4444444444", "Baño", "baño2", R.mipmap.bano));
-            beacons.add(new Beacon("5555555555", "Estar", "estar1", R.mipmap.tv));
-            beacons.add(new Beacon("6666666666", "Cocina", "cocina2", R.mipmap.cocina));
-            beacons.add(new Beacon("7777777777", "Lavadero", "lavadero1", R.mipmap.cocina));
-            beacons.add(new Beacon("8888888888", "Dormitorio", "dormitorio1", R.mipmap.dormitorio));
-            beacons.add(new Beacon("9999999999", "Dormitorio", "dormitorio2", R.mipmap.dormitorio));
-            beacons.add(new Beacon("0000000000", "Dormitorio", "dormitorio3", R.mipmap.dormitorio));
-            beacons.add(new Beacon("1010101010", "Estudio", "estudio1", R.mipmap.dormitorio));
-            beacons.add(new Beacon("2020202020", "Despacho", "despacho1", R.mipmap.dormitorio));
-            beacons.add(new Beacon("3030303030", "Cochera", "cochera1", R.mipmap.dormitorio));
-            beacons.add(new Beacon("4040404040", "Gimnasio", "gimnasio1", R.mipmap.dormitorio));
+            beacons.add(new Beacon("11:11:11:11:11:11", "Salón", "salon1", R.drawable.tv));
+            beacons.add(new Beacon("22:22:22:22:22:22", "Cocina", "cocina1", R.drawable.cocina));
+            beacons.add(new Beacon("33:33:33:33:33:33", "Baño", "baño1", R.drawable.bano));
+            beacons.add(new Beacon("44:44:44:44:44:44", "Sala de Estar", "estar1", R.drawable.estar));
+            beacons.add(new Beacon("55:55:55:55:55:55", "Lavadero", "lavadero", R.drawable.lavadero));
+            beacons.add(new Beacon("66:66:66:66:66:66", "Dormitorio 1", "dormitorio1", R.drawable.dormitorio));
+            beacons.add(new Beacon("77:77:77:77:77:77", "Dormitorio 2", "dormitorio2", R.drawable.dormitorio));
+            beacons.add(new Beacon("88:88:88:88:88:88", "Dormitorio 3", "dormitorio3", R.drawable.dormitorio));
+            beacons.add(new Beacon("99:99:99:99:99:99", "Despacho", "despacho1", R.drawable.despacho));
+            beacons.add(new Beacon("00:00:00:00:00:00", "Cochera", "cochera1", R.drawable.garaje));
+            beacons.add(new Beacon("10:10:10:10:10:10", "Gimnasio", "gimnasio1", R.drawable.gimnasio));
 
             //INSERT Actividades
             ArrayList<Actividad> actividades = new ArrayList<>();
@@ -70,30 +67,30 @@ public final class MyAssistantApp extends Application {
             Actividad.persist(actividades).execute();
 
             //INSERT Dispositivos
-            Drawable drawable = getResources().getDrawable(R.mipmap.dormitorio);
+            Drawable drawable = getResources().getDrawable(R.drawable.device);
             Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byte[] thumbnail = stream.toByteArray();
 
-            drawable = getResources().getDrawable(R.drawable.microondas);
+            drawable = getResources().getDrawable(R.drawable.device);
             bitmap = ((BitmapDrawable) drawable).getBitmap();
             stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byte[] foto = stream.toByteArray();
 
             ArrayList<Dispositivo> dispositivos = new ArrayList<>();
-            dispositivos.add(new Dispositivo("1", "LG", "XX44DD", "TPzWuOcmIIg", thumbnail, foto, "Este sería el manual", beacons.get(0)));
-            dispositivos.add(new Dispositivo("2", "SAMSUNG", "JJJASDF", "TPzWuOcmIIg", thumbnail, foto, "Este sería el manual", beacons.get(0)));
-            dispositivos.add(new Dispositivo("3", "SONY", "QWEREWQR33", "TPzWuOcmIIg", thumbnail, foto, "Este sería el manual", beacons.get(0)));
-            dispositivos.add(new Dispositivo("4", "LG", "NGSDGFN", "TPzWuOcmIIg", thumbnail, foto, "Este sería el manual", beacons.get(1)));
-            dispositivos.add(new Dispositivo("5", "BOSCH", "4QWRERT", "TPzWuOcmIIg", thumbnail, foto, "Este sería el manual", beacons.get(1)));
-            dispositivos.add(new Dispositivo("6", "TAURUS", "564645HDF", "TPzWuOcmIIg", thumbnail, foto, "Este sería el manual", beacons.get(2)));
-            dispositivos.add(new Dispositivo("7", "MOULINEX", "BXCXVBBBCVX", "TPzWuOcmIIg", thumbnail, foto, "Este sería el manual", beacons.get(2)));
-            dispositivos.add(new Dispositivo("8", "APPLE", "WETYRTWU", "TPzWuOcmIIg", thumbnail, foto, "Este sería el manual", beacons.get(3)));
-            dispositivos.add(new Dispositivo("9", "TOSHIBA", "MNVBVMN", "TPzWuOcmIIg", thumbnail, foto, "Este sería el manual", beacons.get(3)));
-            dispositivos.add(new Dispositivo("10", "AIRIS", "75575", "TPzWuOcmIIg", thumbnail, foto, "Este sería el manual", beacons.get(6)));
-            dispositivos.add(new Dispositivo("11", "WHIRPOOL", "WERTRTE", "TPzWuOcmIIg", thumbnail, foto, "Este sería el manual", beacons.get(7)));
+            dispositivos.add(new Dispositivo("LG", "XX44DD", "YugLyGDbo1k", thumbnail, foto, "Manual de uso del dispositivo", beacons.get(0)));
+            dispositivos.add(new Dispositivo("SAMSUNG", "JJJASDF", "y8HPKOQIo3s", thumbnail, foto, "Manual de uso del dispositivo", beacons.get(0)));
+            dispositivos.add(new Dispositivo("SONY", "QWEREWQR33", "I8_tY_xA-IQ", thumbnail, foto, "Manual de uso del dispositivo", beacons.get(0)));
+            dispositivos.add(new Dispositivo("LG", "NGSDGFN", "YugLyGDbo1k", thumbnail, foto, "Manual de uso del dispositivo", beacons.get(1)));
+            dispositivos.add(new Dispositivo("BOSCH", "4QWRERT", "2Pp9DvWHZ70", thumbnail, foto, "Manual de uso del dispositivo", beacons.get(1)));
+            dispositivos.add(new Dispositivo("TAURUS", "564645HDF", "WoLF-eYu9gk", thumbnail, foto, "Manual de uso del dispositivo", beacons.get(2)));
+            dispositivos.add(new Dispositivo("MOULINEX", "BXCXVBBBCVX", "IlZOh4R_2nY", thumbnail, foto, "Manual de uso del dispositivo", beacons.get(2)));
+            dispositivos.add(new Dispositivo("APPLE", "WETYRTWU", "B8UR7gftFF4", thumbnail, foto, "Manual de uso del dispositivo", beacons.get(3)));
+            dispositivos.add(new Dispositivo("TOSHIBA", "MNVBVMN", "322XHZJtEjo", thumbnail, foto, "Manual de uso del dispositivo", beacons.get(3)));
+            dispositivos.add(new Dispositivo("AIRIS", "75575", "eFgO_Obz8YU", thumbnail, foto, "Manual de uso del dispositivo", beacons.get(6)));
+            dispositivos.add(new Dispositivo("WHIRPOOL", "WERTRTE", "4cdXedN-1cQ", thumbnail, foto, "Manual de uso del dispositivo", beacons.get(7)));
             Dispositivo.persist(dispositivos).ignoreNullValues().execute();
 
             Beacon.persist(beacons).execute();

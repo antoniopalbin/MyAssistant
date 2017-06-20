@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.master.antonio.myassistant.R;
 import com.master.antonio.myassistant.adapters.IconAdapter;
 import com.master.antonio.myassistant.models.Beacon;
+import com.master.antonio.myassistant.utilities.MyAssistantUtilities;
 import com.siimkinks.sqlitemagic.Select;
 
 import java.util.Arrays;
@@ -32,8 +33,6 @@ public class EditBeaconActivity extends AppCompatActivity {
     EditText inputEstancia;
     int icono;
     Spinner sp;
-    String[] estancias = {"Baño", "Cocina", "Salón", "Dormitorio"};
-    int[] iconos = {R.mipmap.bano, R.mipmap.cocina, R.mipmap.tv, R.mipmap.dormitorio};
 
     String idBeacon;
     Beacon beacon;
@@ -55,13 +54,13 @@ public class EditBeaconActivity extends AppCompatActivity {
         inputEstancia = (EditText) findViewById(R.id.InputEstancia);
         sp = (Spinner) findViewById(R.id.spinner);
 
-        IconAdapter adapter = new IconAdapter(this, estancias, iconos);
+        IconAdapter adapter = new IconAdapter(this, MyAssistantUtilities.getEstancias(), MyAssistantUtilities.getIconos());
         sp.setAdapter(adapter);
         sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                icono = iconos[position];
+                icono = MyAssistantUtilities.getIconos()[position];
             }
 
             @Override
@@ -90,7 +89,7 @@ public class EditBeaconActivity extends AppCompatActivity {
 
         inputDescripcion.setText(beacon.getDescripcion());
         inputEstancia.setText(beacon.getEstancia());
-        sp.setSelection(Arrays.asList(iconos).indexOf(beacon.getIcono()));
+        sp.setSelection(Arrays.asList(MyAssistantUtilities.getIconos()).indexOf(beacon.getIcono()));
     }
 
     private void GuardarBeacon() {

@@ -66,7 +66,6 @@ public class AdminActivity extends AppCompatActivity {
 
         //enviarNotificacion("nazaaret345@gmail.com", "MyAssistan Notificación", "Probando" );
 
-
         //Configurar tabhost
         tabs = (TabHost) findViewById(R.id.tabhost);
         tabs.setup();
@@ -123,9 +122,9 @@ public class AdminActivity extends AppCompatActivity {
         Regla1 = (Switch) findViewById(R.id.Regla1);
         Regla1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
 
-                }else{
+                } else {
 
                 }
             }
@@ -133,9 +132,9 @@ public class AdminActivity extends AppCompatActivity {
         Regla2 = (Switch) findViewById(R.id.Regla2);
         Regla2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
 
-                }else{
+                } else {
 
                 }
             }
@@ -144,51 +143,46 @@ public class AdminActivity extends AppCompatActivity {
         Regla3 = (Switch) findViewById(R.id.Regla3);
         Regla3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
 
-                }else{
+                } else {
 
                 }
             }
         });
 
         notificacion = (CheckBox) findViewById(R.id.NotificacionEmail);
-        notificacion.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
+        notificacion.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                if(isChecked){
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
 
-                }else{
+                } else {
 
                 }
             }
         });
 
         cuentas = (ListView) findViewById(R.id.ListCuentas);
-
         AddCuenta = (Button) findViewById(R.id.AddCuenta);
-
     }
 
     private void startAddNewBeacon() {
-        Intent intent = new Intent(this, DetectarBeaconsActivity.class);
+        Intent intent = new Intent(this, SearchBeaconsActivity.class);
         startActivity(intent);
     }
 
-    private void startListDispositivosBeacons(String idBeacon){
-        Intent intent = new Intent(this, ListDispositivosBeaconsActivity.class);
+    private void startListDispositivosBeacons(String idBeacon) {
+        Intent intent = new Intent(this, ListBeaconDeviceActivity.class);
         intent.putExtra("IdBeacon", idBeacon);
         startActivity(intent);
-
     }
 
     private void showLVBeacons() {
         lvBeacons = (ListView) findViewById(R.id.ListBeacons);
         lvBeacons.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
 
-        beacons = Select.from(BEACON).orderBy(BEACON.ESTANCIA.asc(),BEACON.DESCRIPCION.asc()).queryDeep().execute();
+        beacons = Select.from(BEACON).orderBy(BEACON.ESTANCIA.asc(), BEACON.DESCRIPCION.asc()).queryDeep().execute();
 
         ArrayAdapter adaptadorBeacons =
                 new ArrayAdapter(this // Context
@@ -219,7 +213,6 @@ public class AdminActivity extends AppCompatActivity {
                 };
         lvBeacons.setAdapter(adaptadorBeacons);
 
-
         lvBeacons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -228,11 +221,10 @@ public class AdminActivity extends AppCompatActivity {
         });
     }
 
-    private void enviarNotificacion(String Email, String Subject, String Contenido ){
+    private void enviarNotificacion(String Email, String Subject, String Contenido) {
         SendMail sm = new SendMail(this, Email, Subject, Contenido);
 
         //Executing sendmail to send email
         sm.execute();
-
     }
 }

@@ -32,7 +32,7 @@ import static com.siimkinks.sqlitemagic.DispositivoTable.DISPOSITIVO;
  * Created by anton on 31/05/2017.
  */
 
-public class ListDispositivosBeaconsActivity extends AppCompatActivity {
+public class ListBeaconDeviceActivity extends AppCompatActivity {
     FloatingActionButton fab;
     ListView ListDispositivos;
     List<Dispositivo> Dispositivos;
@@ -48,7 +48,6 @@ public class ListDispositivosBeaconsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
-
         if (bd != null) {
             IdBeacon = (String) bd.get("IdBeacon");
         }
@@ -69,7 +68,7 @@ public class ListDispositivosBeaconsActivity extends AppCompatActivity {
 
 
     private void AsociarBeaconDispositivo() {
-        Intent intent = new Intent(this, AsociarBeaconDispositivo.class);
+        Intent intent = new Intent(this, MatchBeaconDeviceActivity.class);
         intent.putExtra("IdBeacon", IdBeacon);
         startActivity(intent);
     }
@@ -81,7 +80,7 @@ public class ListDispositivosBeaconsActivity extends AppCompatActivity {
     }
 
     public void editarDispositivo(String IDdisp) {
-        Intent intent = new Intent(this, EditarBeaconDispositivo.class);
+        Intent intent = new Intent(this, EditBeaconDeviceActivity.class);
         intent.putExtra("IdDispositivo", IDdisp);
         intent.putExtra("IdBeacon", IdBeacon);
         startActivity(intent);
