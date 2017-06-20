@@ -6,5 +6,5 @@ package com.master.antonio.myassistant;
 
 public class Config {
     public static final String EMAIL ="contactovideotag@gmail.com";
-    public static final String PASSWORD ="";
+    public static final String PASSWORD ="BcUU*d8D";
 }

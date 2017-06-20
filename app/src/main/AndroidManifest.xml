@@ -75,6 +75,11 @@
             android:name=".activities.ViewManualActivity"
             android:parentActivityName=".activities.SelectDeviceAvailableActivity" />
 
+        <service
+            android:name=".CheckRules"
+            android:label="Check Rules" >
+        </service>
+
     </application>
 
 </manifest>

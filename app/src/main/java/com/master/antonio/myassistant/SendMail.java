@@ -46,16 +46,16 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
     protected void onPreExecute() {
         super.onPreExecute();
         //Showing progress dialog while sending email
-        progressDialog = ProgressDialog.show(context, "Enviando mensaje", "Espere por favor...", false, false);
+        //progressDialog = ProgressDialog.show(context, "Enviando mensaje", "Espere por favor...", false, false);
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
         //Dismissing the progress dialog
-        progressDialog.dismiss();
+        //progressDialog.dismiss();
         //Showing a success message
-        Toast.makeText(context, "Mensaje Enviado", Toast.LENGTH_LONG).show();
+        //Toast.makeText(context, "Mensaje Enviado", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -83,6 +83,7 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
         try {
             //Creating MimeMessage object
             MimeMessage mm = new MimeMessage(session);
+
 
             //Setting sender address
             mm.setFrom(new InternetAddress(Config.EMAIL));

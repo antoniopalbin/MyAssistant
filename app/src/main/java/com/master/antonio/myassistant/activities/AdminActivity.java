@@ -1,5 +1,7 @@
 package com.master.antonio.myassistant.activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,6 +25,7 @@ import android.widget.Switch;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.master.antonio.myassistant.CheckRules;
 import com.master.antonio.myassistant.R;
 import com.master.antonio.myassistant.SendMail;
 import com.master.antonio.myassistant.models.Beacon;
@@ -42,7 +45,6 @@ public class AdminActivity extends AppCompatActivity {
     Switch Regla1;
     Switch Regla2;
     Switch Regla3;
-    CheckBox notificacion;
     ListView cuentas;
     Button AddCuenta;
 
@@ -50,6 +52,10 @@ public class AdminActivity extends AppCompatActivity {
     ListView lvBeacons;
 
     Context cont;
+
+    Boolean regla1 = false;
+    Boolean regla2 = false;
+    Boolean regla3 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +70,7 @@ public class AdminActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        //enviarNotificacion("nazaaret345@gmail.com", "MyAssistan Notificación", "Probando" );
+
 
         //Configurar tabhost
         tabs = (TabHost) findViewById(R.id.tabhost);
@@ -123,20 +129,22 @@ public class AdminActivity extends AppCompatActivity {
         Regla1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-
+                    regla1 = true;
                 } else {
-
+                    regla1 = false;
                 }
+                ConfigCheckRules();
             }
         });
         Regla2 = (Switch) findViewById(R.id.Regla2);
         Regla2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-
+                    regla2 = true;
                 } else {
-
+                    regla2 = false;
                 }
+                ConfigCheckRules();
             }
         });
 
@@ -144,27 +152,32 @@ public class AdminActivity extends AppCompatActivity {
         Regla3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-
+                    regla3 = true;
                 } else {
-
+                    regla3 = false;
                 }
+                ConfigCheckRules();
             }
         });
 
-        notificacion = (CheckBox) findViewById(R.id.NotificacionEmail);
-        notificacion.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
 
-                } else {
-
-                }
-            }
-        });
 
         cuentas = (ListView) findViewById(R.id.ListCuentas);
         AddCuenta = (Button) findViewById(R.id.AddCuenta);
+
+
+    }
+
+    private void ConfigCheckRules(){
+
+        stopService(new Intent(cont, CheckRules.class));
+
+        Intent intent = new Intent(cont, CheckRules.class);
+        intent.putExtra("Regla1", regla1);
+        intent.putExtra("Regla2", regla2);
+        intent.putExtra("Regla3", regla3);
+
+        startService(intent);
     }
 
     private void startAddNewBeacon() {
@@ -221,10 +234,5 @@ public class AdminActivity extends AppCompatActivity {
         });
     }
 
-    private void enviarNotificacion(String Email, String Subject, String Contenido) {
-        SendMail sm = new SendMail(this, Email, Subject, Contenido);
 
-        //Executing sendmail to send email
-        sm.execute();
-    }
 }

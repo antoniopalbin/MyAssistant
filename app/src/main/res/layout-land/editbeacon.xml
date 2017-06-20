@@ -20,28 +20,30 @@
         android:id="@+id/edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
+        android:layout_marginStart="28dp"
         android:text="Descripción"
         android:textColor="@android:color/black"
-        android:layout_alignTop="@+id/InputDescripcion"
+        android:layout_alignBaseline="@+id/InputDescripcion"
+        android:layout_alignBottom="@+id/InputDescripcion"
         android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/InputDescripcion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="14dp"
         android:ems="10"
         android:hint="Descripcion"
         android:inputType="textPersonName"
         android:layout_below="@+id/textView10"
-        android:layout_toStartOf="@+id/spinner" />
+        android:layout_toEndOf="@+id/edit"
+        android:layout_marginStart="54dp" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="40dp"
         android:text="Estancia"
         android:textColor="@android:color/black"
         android:layout_below="@+id/InputDescripcion"
@@ -54,7 +56,8 @@
         android:ems="10"
         android:hint="Estancia"
         android:inputType="textPersonName"
-        android:layout_alignTop="@+id/textView12"
+        android:layout_alignBaseline="@+id/textView12"
+        android:layout_alignBottom="@+id/textView12"
         android:layout_alignStart="@+id/InputDescripcion" />
 
     <TextView
@@ -63,36 +66,28 @@
         android:layout_height="wrap_content"
         android:text="Icono"
         android:textColor="@android:color/black"
-        android:layout_alignTop="@+id/InputDescripcion"
-        android:layout_toEndOf="@+id/InputDescripcion"
-        android:layout_marginStart="36dp" />
+        android:layout_above="@+id/btnGuardar"
+        android:layout_alignEnd="@+id/textView12"
+        android:layout_marginBottom="18dp" />
 
     <Button
         android:id="@+id/btnGuardar"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Guardar"
-        android:layout_alignBaseline="@+id/btnEliminar"
-        android:layout_alignBottom="@+id/btnEliminar"
-        android:layout_toEndOf="@+id/btnEliminar"
-        android:layout_marginStart="30dp" />
-
-    <Button
-        android:id="@+id/btnEliminar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/InputEstancia"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
-        android:text="Eliminar" />
+        android:layout_marginStart="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/InputEstancia"
+        android:layout_marginBottom="33dp"
+        android:background="@color/colorSencudary"/>
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textView13"
-        android:layout_toEndOf="@+id/btnGuardar"
-        android:layout_marginStart="91dp" />
+        android:layout_alignStart="@+id/InputEstancia"
+        android:layout_alignEnd="@+id/InputEstancia" />
 
 
 </RelativeLayout>

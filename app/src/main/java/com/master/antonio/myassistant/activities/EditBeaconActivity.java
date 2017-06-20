@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -28,7 +30,6 @@ import static com.siimkinks.sqlitemagic.BeaconTable.BEACON;
 
 public class EditBeaconActivity extends AppCompatActivity {
     Button btnGuardar;
-    Button btnEliminar;
     EditText inputDescripcion;
     EditText inputEstancia;
     int icono;
@@ -42,6 +43,8 @@ public class EditBeaconActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.editbeacon);
 
+        getSupportActionBar().setTitle("Editar Beacon");
+
         Intent intent = getIntent();
         Bundle bdl = intent.getExtras();
         if (bdl != null) {
@@ -49,7 +52,6 @@ public class EditBeaconActivity extends AppCompatActivity {
         }
 
         btnGuardar = (Button) findViewById(R.id.btnGuardar);
-        btnEliminar = (Button) findViewById(R.id.btnEliminar);
         inputDescripcion = (EditText) findViewById(R.id.InputDescripcion);
         inputEstancia = (EditText) findViewById(R.id.InputEstancia);
         sp = (Spinner) findViewById(R.id.spinner);
@@ -73,12 +75,6 @@ public class EditBeaconActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 GuardarBeacon();
-            }
-        });
-        btnEliminar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EliminarBeacon();
             }
         });
         LoadBeacon(idBeacon);
@@ -130,5 +126,23 @@ public class EditBeaconActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("¿Estás seguro de eliminar este elemento?").setPositiveButton("Sí", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.eliminar_dispositivo, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_delete:
+                EliminarBeacon();
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return true;
     }
 }

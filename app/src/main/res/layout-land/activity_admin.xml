@@ -66,7 +66,7 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginTop="10dp"
-                        android:text="Notificar si no se detecta activiadad"
+                        android:text="Notificar si no se detecta actividad"
                         android:theme="@style/SCBSwitch" />
 
                     <Switch
@@ -77,7 +77,7 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginTop="10dp"
-                        android:text="Notificar si no se vista la cocina"
+                        android:text="Notificar si no se visita la cocina"
                         android:theme="@style/SCBSwitch" />
 
                     <View
@@ -85,17 +85,7 @@
                         android:layout_height="1dp"
                         android:background="@android:color/darker_gray" />
 
-                    <CheckBox
-                        android:id="@+id/NotificacionEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:button="@null"
-                        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:paddingTop="10dp"
-                        android:text="Envio de notificaciones por email"
-                        android:textColor="@android:color/black" />
+
 
                     <TextView
                         android:id="@+id/textView3"
@@ -104,14 +94,14 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:paddingTop="10dp"
-                        android:text="Cuentas"
+                        android:text="Cuenta"
+                        android:textSize="18dp"
                         android:textColor="@android:color/black" />
 
                     <ListView
                         android:id="@+id/ListCuentas"
                         android:layout_width="match_parent"
-                        android:layout_height="122dp"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp" />
 
@@ -124,13 +114,13 @@
                     <Button
                         android:id="@+id/AddCuenta"
                         android:layout_width="match_parent"
-                        android:layout_height="62dp"
+                        android:layout_height="50dp"
                         android:background="@android:color/white"
                         android:drawableLeft="@drawable/addcuenta"
-                        android:drawablePadding="-190sp"
+                        android:drawablePadding="-400dp"
                         android:paddingLeft="15sp"
                         android:text="Añadir cuenta"
-                        android:textAllCaps="false"/>
+                        android:textAllCaps="false" />
 
 
                 </LinearLayout>
