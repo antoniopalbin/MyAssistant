@@ -32,7 +32,7 @@ public final class MyAssistantApp extends Application {
         File database = getApplicationContext().getDatabasePath("MyAssistant.db");
         if (!database.exists()) {
             //INSERT Aviso
-            Aviso aviso = new Aviso("1", true, false, true, true, "apar0001@red.ujaen.es,ajcr0007@red.ujaen.es");
+            Aviso aviso = new Aviso(true, false, true, true, "apar0001@red.ujaen.es");
             aviso.insert().execute();
 
             //INSERT Beacons

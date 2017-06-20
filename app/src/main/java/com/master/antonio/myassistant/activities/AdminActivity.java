@@ -1,7 +1,5 @@
 package com.master.antonio.myassistant.activities;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,7 +15,6 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -27,12 +24,13 @@ import android.widget.TextView;
 
 import com.master.antonio.myassistant.CheckRules;
 import com.master.antonio.myassistant.R;
-import com.master.antonio.myassistant.SendMail;
+import com.master.antonio.myassistant.models.Aviso;
 import com.master.antonio.myassistant.models.Beacon;
 import com.siimkinks.sqlitemagic.Select;
 
 import java.util.List;
 
+import static com.siimkinks.sqlitemagic.AvisoTable.AVISO;
 import static com.siimkinks.sqlitemagic.BeaconTable.BEACON;
 
 /**
@@ -50,12 +48,9 @@ public class AdminActivity extends AppCompatActivity {
 
     List<Beacon> beacons;
     ListView lvBeacons;
+    Aviso aviso;
 
     Context cont;
-
-    Boolean regla1 = false;
-    Boolean regla2 = false;
-    Boolean regla3 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +64,6 @@ public class AdminActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-
 
         //Configurar tabhost
         tabs = (TabHost) findViewById(R.id.tabhost);
@@ -124,58 +117,48 @@ public class AdminActivity extends AppCompatActivity {
 
         lvBeacons = (ListView) findViewById(R.id.ListBeacons);
         showLVBeacons();
+        loadAvisos();
 
         Regla1 = (Switch) findViewById(R.id.Regla1);
+        Regla1.setChecked(aviso.isTipoAviso1());
         Regla1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    regla1 = true;
-                } else {
-                    regla1 = false;
-                }
                 ConfigCheckRules();
             }
         });
+
         Regla2 = (Switch) findViewById(R.id.Regla2);
+        Regla2.setChecked(aviso.isTipoAviso2());
         Regla2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    regla2 = true;
-                } else {
-                    regla2 = false;
-                }
                 ConfigCheckRules();
             }
         });
 
         Regla3 = (Switch) findViewById(R.id.Regla3);
+        Regla3.setChecked(aviso.isTipoAviso3());
         Regla3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    regla3 = true;
-                } else {
-                    regla3 = false;
-                }
                 ConfigCheckRules();
             }
         });
 
-
-
         cuentas = (ListView) findViewById(R.id.ListCuentas);
         AddCuenta = (Button) findViewById(R.id.AddCuenta);
-
-
     }
 
-    private void ConfigCheckRules(){
+    private void ConfigCheckRules() {
+        aviso.setTipoAviso1(Regla1.isChecked());
+        aviso.setTipoAviso2(Regla2.isChecked());
+        aviso.setTipoAviso3(Regla3.isChecked());
+        aviso.update().execute();
 
         stopService(new Intent(cont, CheckRules.class));
 
         Intent intent = new Intent(cont, CheckRules.class);
-        intent.putExtra("Regla1", regla1);
-        intent.putExtra("Regla2", regla2);
-        intent.putExtra("Regla3", regla3);
+        intent.putExtra("Regla1", Regla1.isChecked());
+        intent.putExtra("Regla2", Regla2.isChecked());
+        intent.putExtra("Regla3", Regla3.isChecked());
 
         startService(intent);
     }
@@ -189,6 +172,10 @@ public class AdminActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ListBeaconDeviceActivity.class);
         intent.putExtra("IdBeacon", idBeacon);
         startActivity(intent);
+    }
+
+    private void loadAvisos() {
+        aviso = Select.from(AVISO).takeFirst().execute();
     }
 
     private void showLVBeacons() {
@@ -233,6 +220,4 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

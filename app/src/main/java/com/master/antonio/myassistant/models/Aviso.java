@@ -10,7 +10,6 @@ import com.siimkinks.sqlitemagic.annotation.Table;
 public class Aviso {
     @Id(autoIncrement = true)
     public long id;
-    public String idAviso;
     public boolean tipoAviso1;
     public boolean tipoAviso2;
     public boolean tipoAviso3;
@@ -21,22 +20,13 @@ public class Aviso {
         super();
     }
 
-    public Aviso(String idAviso, boolean tipoAviso1, boolean tipoAviso2, boolean tipoAviso3, boolean notificarEmail, String emails) {
+    public Aviso(boolean tipoAviso1, boolean tipoAviso2, boolean tipoAviso3, boolean notificarEmail, String emails) {
         super();
-        this.idAviso = idAviso;
         this.tipoAviso1 = tipoAviso1;
         this.tipoAviso2 = tipoAviso2;
         this.tipoAviso3 = tipoAviso3;
         this.notificarEmail = notificarEmail;
         this.emails = emails;
-    }
-
-    public String getIdAviso() {
-        return idAviso;
-    }
-
-    public void setIdAviso(String idAviso) {
-        this.idAviso = idAviso;
     }
 
     public boolean isTipoAviso1() {
