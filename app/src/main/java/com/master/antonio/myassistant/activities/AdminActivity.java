@@ -1,10 +1,12 @@
 package com.master.antonio.myassistant.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Switch;
@@ -28,6 +31,7 @@ import com.master.antonio.myassistant.models.Aviso;
 import com.master.antonio.myassistant.models.Beacon;
 import com.siimkinks.sqlitemagic.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.siimkinks.sqlitemagic.AvisoTable.AVISO;
@@ -143,8 +147,45 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-        cuentas = (ListView) findViewById(R.id.ListCuentas);
         AddCuenta = (Button) findViewById(R.id.AddCuenta);
+        AddCuenta.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                showInputDialog();
+            }
+        });
+
+        cuentas = (ListView) findViewById(R.id.ListCuentas);
+        showLVCuentas();
+    }
+
+    protected void showInputDialog() {
+        // get prompts.xml view
+        LayoutInflater layoutInflater = LayoutInflater.from(AdminActivity.this);
+        View promptView = layoutInflater.inflate(R.layout.add_mail, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AdminActivity.this);
+        alertDialogBuilder.setView(promptView);
+
+        final EditText editText = (EditText) promptView.findViewById(R.id.txtEmail);
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        aviso.setEmails(editText.getText().toString());
+                        aviso.update().execute();
+                        showLVCuentas();
+                    }
+                })
+                .setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 
     private void ConfigCheckRules() {
@@ -219,5 +260,80 @@ public class AdminActivity extends AppCompatActivity {
                 startListDispositivosBeacons(beacons.get(position).getIdBeacon());
             }
         });
+    }
+
+    private void showLVCuentas() {
+        cuentas = (ListView) findViewById(R.id.ListCuentas);
+        cuentas.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+
+        List<String> auxCuentas = new ArrayList<>();
+        if (aviso.getEmails() != null && !aviso.getEmails().isEmpty()) {
+            auxCuentas.add(aviso.getEmails());
+            AddCuenta.setVisibility(View.GONE);
+        } else {
+            AddCuenta.setVisibility(View.VISIBLE);
+        }
+
+        ArrayAdapter adaptadorCuentas =
+                new ArrayAdapter(this // Context
+                        , R.layout.email_item_layout //Resource
+                        , auxCuentas // Vector o lista
+                ) {
+                    public View getView(int position
+                            , View convertView
+                            , ViewGroup parent) {
+                        LayoutInflater inflater = (LayoutInflater) getContext()
+                                .getSystemService(getContext().LAYOUT_INFLATER_SERVICE);
+
+                        // Creamos la vista para cada fila
+                        View fila = inflater.inflate(R.layout.email_item_layout, parent, false);
+
+                        // Creamos cada uno de los widgets que forman una fila
+                        TextView cuentaView = (TextView) fila.findViewById(R.id.email);
+
+                        // Establecemos los valores que queremos que muestren los widgets
+                        cuentaView.setText(aviso.getEmails());
+                        return fila;
+                    }
+                };
+        cuentas.setAdapter(adaptadorCuentas);
+
+        cuentas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                showEditDialog();
+            }
+        });
+
+    }
+
+    protected void showEditDialog() {
+        // get prompts.xml view
+        LayoutInflater layoutInflater = LayoutInflater.from(AdminActivity.this);
+        View promptView = layoutInflater.inflate(R.layout.add_mail, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AdminActivity.this);
+        alertDialogBuilder.setView(promptView);
+
+        final EditText editText = (EditText) promptView.findViewById(R.id.txtEmail);
+        editText.setText(aviso.getEmails());
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        aviso.setEmails(editText.getText().toString());
+                        aviso.update().execute();
+                        showLVCuentas();
+                    }
+                })
+                .setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 }

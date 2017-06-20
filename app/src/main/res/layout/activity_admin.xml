@@ -55,7 +55,7 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginTop="10dp"
-                        android:text="Notificar si repetidamente se visita el baño"
+                        android:text="Notificar si se visita el baño repetidamente en la última hora"
                         android:theme="@style/SCBSwitch" />
 
                     <Switch
@@ -77,7 +77,7 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginTop="10dp"
-                        android:text="Notificar si no se visita la cocina"
+                        android:text="Notificar si se visita la cocina repetidamente en la última hora"
                         android:theme="@style/SCBSwitch" />
 
                     <View
