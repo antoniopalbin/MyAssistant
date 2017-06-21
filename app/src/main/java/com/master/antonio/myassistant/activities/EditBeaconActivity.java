@@ -85,7 +85,14 @@ public class EditBeaconActivity extends AppCompatActivity {
 
         inputDescripcion.setText(beacon.getDescripcion());
         inputEstancia.setText(beacon.getEstancia());
-        sp.setSelection(Arrays.asList(MyAssistantUtilities.getIconos()).indexOf(beacon.getIcono()));
+        sp.setSelection(find(MyAssistantUtilities.getIconos(), beacon.getIcono()));
+    }
+
+    public int find(int[] array, int value) {
+        for (int i = 0; i < array.length; i++)
+            if (array[i] == value)
+                return i;
+        return -1;
     }
 
     private void GuardarBeacon() {
@@ -106,26 +113,29 @@ public class EditBeaconActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void EliminarBeacon() {
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+    private void showAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Eliminar elemento");
+        builder.setMessage("¿Estás seguro de eliminar este elemento?");
+        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        beacon.delete().execute();
-                        IrAListaBeacons();
-                        break;
-
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        //No button clicked
-                        break;
-                }
+                dialog.dismiss();
+                beacon.delete().execute();
+                IrAListaBeacons();
             }
-        };
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("¿Estás seguro de eliminar este elemento?").setPositiveButton("Sí", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
+    private void EliminarBeacon() {
+        showAlert();
     }
 
     @Override
@@ -139,10 +149,13 @@ public class EditBeaconActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_delete:
                 EliminarBeacon();
+                break;
             case android.R.id.home:
                 onBackPressed();
                 break;
+            default:
+                break;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 }

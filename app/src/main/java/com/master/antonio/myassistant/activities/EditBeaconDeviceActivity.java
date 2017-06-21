@@ -53,33 +53,38 @@ public class EditBeaconDeviceActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_delete:
                 EliminarDispositivo();
+                break;
             case android.R.id.home:
                 onBackPressed();
                 break;
+            default:
+                break;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     public void EliminarDispositivo() {
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        showAlert();
+    }
+
+    private void showAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Eliminar elemento");
+        builder.setMessage("¿Estás seguro de eliminar este elemento?");
+        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        Delete.from(DISPOSITIVO).where(DISPOSITIVO.ID.is(Long.parseLong(IdDispositivo))).execute();
-                        fragment.onWizardComplete();
-                        break;
-
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        //No button clicked
-                        break;
-                }
+                dialog.dismiss();
+                Delete.from(DISPOSITIVO).where(DISPOSITIVO.ID.is(Long.parseLong(IdDispositivo))).execute();
+                fragment.onWizardComplete();
             }
-        };
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("¿Estás seguro de eliminar este elemento?").setPositiveButton("Sí", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
-
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 }
