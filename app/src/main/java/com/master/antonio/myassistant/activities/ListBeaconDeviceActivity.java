@@ -114,9 +114,14 @@ public class ListBeaconDeviceActivity extends AppCompatActivity {
                         // Establecemos los valores que queremos que muestren los widgets
                         Dispositivo tmpV = Dispositivos.get(position);
 
-                        Bitmap bmp = BitmapFactory.decodeByteArray(tmpV.getThumbnail(), 0, tmpV.getThumbnail().length);
-                        ImageView iconoView = (ImageView) fila.findViewById(R.id.imgIcono);
-                        iconoView.setImageBitmap(bmp);
+                        if(tmpV.getThumbnail()!=null) {
+                            Bitmap bmp = BitmapFactory.decodeByteArray(tmpV.getThumbnail(), 0, tmpV.getThumbnail().length);
+                            ImageView iconoView = (ImageView) fila.findViewById(R.id.imgIcono);
+                            iconoView.setImageBitmap(bmp);
+                        }else{
+                            ImageView iconoView = (ImageView) fila.findViewById(R.id.imgIcono);
+                            iconoView.setImageResource(R.drawable.device);
+                        }
                         TextTitulo.setText(tmpV.getMarca());
                         TextTime.setText(tmpV.getModelo());
                         return fila;

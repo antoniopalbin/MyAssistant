@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.master.antonio.myassistant.R;
 import com.master.antonio.myassistant.models.Beacon;
@@ -92,15 +93,22 @@ public class EditarStep4 extends WizardStep {
     private void bindDataFields() {
         Manual = InputManual.getText().toString();
 
-        //Modificamos el dispositivo
-        Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(IdBeacon)).takeFirst().execute();
+        if(Marca!= null && !Marca.isEmpty() && Modelo!=null && !Modelo.isEmpty()) {
 
-        Delete.from(DISPOSITIVO).where(DISPOSITIVO.ID.is(IdDispositivo)).execute();
+            //Modificamos el dispositivo
+            Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(IdBeacon)).takeFirst().execute();
 
-        ArrayList<Dispositivo> dispositivos = new ArrayList<>();
-        dispositivos.add(new Dispositivo(Marca, Modelo, KeyVideo, img, img, Manual, aux));
-        Dispositivo.persist(dispositivos).ignoreNullValues().execute();
+            Delete.from(DISPOSITIVO).where(DISPOSITIVO.ID.is(IdDispositivo)).execute();
 
+            ArrayList<Dispositivo> dispositivos = new ArrayList<>();
+            dispositivos.add(new Dispositivo(Marca, Modelo, KeyVideo, img, img, Manual, aux));
+            Dispositivo.persist(dispositivos).ignoreNullValues().execute();
+            Toast toast1 = Toast.makeText(this.getContext(), "Dispositivo guardado correctamente", Toast.LENGTH_SHORT);
+            toast1.show();
+        }else{
+            Toast toast1 = Toast.makeText(this.getContext(), "El dispositivo no se ha modificado", Toast.LENGTH_SHORT);
+            toast1.show();
+        }
         /*Update.table(DISPOSITIVO)
                 .set(DISPOSITIVO.MARCA, Marca)
                 .set(DISPOSITIVO.MODELO, Modelo)

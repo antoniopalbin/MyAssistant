@@ -1,6 +1,5 @@
 package com.master.antonio.myassistant.wizard;
 
-import com.master.antonio.myassistant.models.Beacon;
 import com.master.antonio.myassistant.models.Dispositivo;
 import com.siimkinks.sqlitemagic.Select;
 
@@ -37,8 +36,6 @@ public class FormWizardEditar extends BasicWizardLayout {
         setNextButtonText("Siguiente");
         setBackButtonText("Atrás");
         setFinishButtonText("Modificar");
-
-
     }
 
     public void setIdDispositivo(String _idDispositivo, String _idBeacon){
@@ -52,7 +49,6 @@ public class FormWizardEditar extends BasicWizardLayout {
         img = aux.getFoto();
         Manual = aux.getManual();
     }
-
 
     /*
         You must override this method and create a wizard flow by

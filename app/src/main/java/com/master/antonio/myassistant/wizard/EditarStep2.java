@@ -39,7 +39,7 @@ public class EditarStep2 extends WizardStep {
     @ContextVariable
     private long IdDispositivo;
     @ContextVariable
-    private String  IdBeacon;
+    private String IdBeacon;
 
     SeekBar progress;
     YouTubeFragment fragment;
@@ -70,7 +70,7 @@ public class EditarStep2 extends WizardStep {
 
         InputUrl = (EditText) v.findViewById(R.id.InputUrl);
 
-        InputUrl.setText("https://youtu.be/"+KeyVideo);
+        InputUrl.setText("https://youtu.be/" + KeyVideo);
 
         fragment = (YouTubeFragment) getChildFragmentManager().findFragmentById(R.id.fragment_youtube);
         fragment.setVideoId(KeyVideo);
@@ -80,13 +80,12 @@ public class EditarStep2 extends WizardStep {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!InputUrl.getText().equals("")){
+                if (!InputUrl.getText().equals("")) {
                     setVideo(InputUrl.getText().toString());
                 }
 
             }
         });
-
 
 
         return v;
@@ -105,21 +104,21 @@ public class EditarStep2 extends WizardStep {
     }
 
 
-    private void setVideo(String url){
+    private void setVideo(String url) {
+        String aux = url.replace("https://youtu.be/","");
         String pattern = "(?<=watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*";
         Pattern compiledPattern = Pattern.compile(pattern);
-        Matcher matcher = compiledPattern.matcher(url);
+        Matcher matcher = compiledPattern.matcher(aux);
 
-        if(matcher.find()){
+        if (matcher.find()) {
             videoId = matcher.group();
+        }else{
+            videoId = aux;
         }
-
-
     }
 
     private void bindDataFields() {
-
-        if(videoId != null){
+        if (videoId != null) {
             KeyVideo = videoId;
         }
     }

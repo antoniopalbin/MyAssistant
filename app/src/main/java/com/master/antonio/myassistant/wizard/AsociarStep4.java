@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.master.antonio.myassistant.R;
 import com.master.antonio.myassistant.models.Beacon;
@@ -87,10 +88,17 @@ public class AsociarStep4 extends WizardStep {
     private void bindDataFields() {
         Manual = InputManual.getText().toString();
 
-        //realizamos la inserccion del dispositivo
-        Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(IdBeacon)).takeFirst().execute();
-        ArrayList<Dispositivo> dispositivos = new ArrayList<>();
-        dispositivos.add(new Dispositivo(Marca, Modelo, KeyVideo, img, img, Manual, aux));
-        Dispositivo.persist(dispositivos).ignoreNullValues().execute();
+        //realizamos la inserción del dispositivo
+        if(Marca!= null && !Marca.isEmpty() && Modelo!=null && !Modelo.isEmpty()) {
+            Beacon aux = Select.from(BEACON).where(BEACON.ID_BEACON.is(IdBeacon)).takeFirst().execute();
+            ArrayList<Dispositivo> dispositivos = new ArrayList<>();
+            dispositivos.add(new Dispositivo(Marca, Modelo, KeyVideo, img, img, Manual, aux));
+            Dispositivo.persist(dispositivos).ignoreNullValues().execute();
+            Toast toast1 = Toast.makeText(this.getContext(), "Dispositivo creado correctamente", Toast.LENGTH_SHORT);
+            toast1.show();
+        }else{
+            Toast toast1 = Toast.makeText(this.getContext(), "El dispositivo no se ha creado", Toast.LENGTH_SHORT);
+            toast1.show();
+        }
     }
 }

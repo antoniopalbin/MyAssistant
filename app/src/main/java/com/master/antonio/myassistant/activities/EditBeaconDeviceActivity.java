@@ -60,7 +60,7 @@ public class EditBeaconDeviceActivity extends AppCompatActivity {
             default:
                 break;
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     public void EliminarDispositivo() {
