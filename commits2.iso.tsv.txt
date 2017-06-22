@@ -1,0 +1,43 @@
+be72085|	|Antonio|	|Wed Jun 21 19:20:06 2017|	|Solución guardar dispositivo guardar
+d3119e7|	|Antonio|	|Wed Jun 21 17:53:08 2017|	|Solución eliminación de beacon y eliminación de dispositivo
+9a7c119|	|Antonio|	|Wed Jun 21 00:22:07 2017|	|Gestión de cuentas de email
+337b55f|	|Antonio|	|Tue Jun 20 23:39:31 2017|	|Actualización de avisos y comprobación de envío de aviso
+3dd3dbb|	|ajcr0007|	|Tue Jun 20 20:31:33 2017|	|Modificacion en la edicion de bacon, creacion de tarea ciclica para comprobar reglas, solucionado el problema con el envio de email y implementado la administracion de reglas
+1e2e89d|	|Antonio|	|Tue Jun 20 18:02:18 2017|	|Refactorización y creación de fichero de utilidades
+57fdea8|	|Antonio|	|Tue Jun 20 01:09:55 2017|	|Visualización de dispositivos de cliente, selección, visionado de vídeo o manual, y registro de actividad
+e6bce4f|	|Antonio|	|Mon Jun 19 20:03:48 2017|	|Edición y eliminación de beacon. Inicio de widget usuario
+818e26e|	|ajcr0007|	|Sun Jun 18 19:53:28 2017|	|Desarrollo de notificaciones (Añadida api para envio de email)
+8b8b6ad|	|ajcr0007|	|Sun Jun 18 18:39:25 2017|	|Creado widget para la secuencia de ayuda al usuario dependiente (Creado evento para click widget y lanzamiento de actividad)
+7d1c6be|	|ajcr0007|	|Fri Jun 16 20:01:01 2017|	|Solucionado el problema de modificacion de imagen de dispositivo, modificacion de avisos y creacion de widget para usuario dependiente
+6d74d8a|	|ajcr0007|	|Thu Jun 15 20:18:08 2017|	|Merge remote-tracking branch 'origin/master'
+242a137|	|ajcr0007|	|Thu Jun 15 20:06:14 2017|	|Implementado edicion de dispositivo, eliminar y añadir dispositivo (Faltan solucionar algunos problemas)
+9667f70|	|Antonio|	|Thu Jun 15 19:50:57 2017|	|Vista y gestión de nueva beacon
+ebaae2a|	|ajcr0007|	|Wed Jun 14 20:19:21 2017|	|Solucionado algunos de los probelmas con la asociacion de beacons (Foto, Insercion del dispositivo y actualizacion del listview)
+fa2fa48|	|ajcr0007|	|Tue Jun 13 20:15:44 2017|	|Continuación del desarrollo de asociacion de beacon con dispositivo
+67baccb|	|Antonio|	|Mon Jun 5 19:17:27 2017|	|Navegación a la vista de dispositivos de la beacon
+642de9b|	|ajcr0007|	|Mon Jun 5 18:02:46 2017|	|Eliminar botones de la lista de beacons (problema con el foco al hacer clik)
+cdc4dac|	|ajcr0007|	|Wed May 31 17:30:44 2017|	|Desarrollo de lista de dispositivos asociados a una beacon
+e9eed1c|	|Antonio|	|Tue May 30 08:40:35 2017|	|Merge branch 'master' of https://github.com/antoniopalbin/MyAssistant
+a47dbf3|	|Antonio|	|Tue May 30 08:40:29 2017|	|Modificación estructura BD. Inserción datos de prueba. Recuperación datos de BD de RegistroActividad y listado de Beacons
+c54e300|	|ajcr0007|	|Mon May 29 19:30:30 2017|	|Solucionado problemas con secuencia de asociacion de beacon con dispositivo
+3c17ee8|	|ajcr0007|	|Sun May 28 19:17:37 2017|	|Desarrollo de la secuencia de asociación de una beacon con un electrodoméstico
+986f555|	|Antonio|	|Sat May 27 21:09:11 2017|	|Inserción de datos de prueba
+cd9036d|	|Antonio|	|Sat May 27 19:24:20 2017|	|Modificación orm bd. Layout de beacons cuidador
+586c2d6|	|ajcr0007|	|Wed May 24 17:50:01 2017|	|Desarrollo de la secuencia de asociacion de beacons con dispositivo
+c9a772a|	|ajcr0007|	|Mon May 22 19:10:15 2017|	|Creada las vista para secuencia de asociación con un electrodoméstico
+6ff8ea5|	|ajcr0007|	|Sun May 21 13:26:03 2017|	|Creada la pestaña avisos y inicio en la creacion de la vista para secuencia de asociación de electrodomestico con beacons
+5c002a7|	|ajcr0007|	|Wed May 17 17:42:57 2017|	|Modificada la parte de Cuidador (tab, color, efecto de cambio de tamaño y botón flotante)
+f222812|	|ajcr0007|	|Mon May 15 19:21:05 2017|	|Integrado escaneo de beacons y cambio de nombre en el BeaconAdpater
+ac5c31a|	|ajcr0007|	|Sun May 14 14:03:38 2017|	|Implementado escaneo de beacons (Se debe cambiar por el uso de bluetooth LE)
+2d0c5a8|	|ajcr0007|	|Sat May 13 20:14:42 2017|	|Creada vista de buscar beacons y desarrollo de escaneo de beacons
+a1db5ba|	|ajcr0007|	|Sat May 13 12:35:35 2017|	|Creada pantalla de visualización de video y modificada la minSDK (15)
+2464765|	|ajcr0007|	|Wed May 10 17:54:27 2017|	|Modificación de la integración de la API de YouTube
+fef5af8|	|ajcr0007|	|Wed May 10 17:33:09 2017|	|Integrada la API de YouTube
+f5f860a|	|ajcr0007|	|Mon May 1 13:31:49 2017|	|Creada vista de registro de actividad (List personalizado en horizontal y vertical y datepickerdialog)
+1f5a795|	|ajcr0007|	|Sun Apr 30 17:36:32 2017|	|Creado el icono de la aplicación y vista principal (vertical y horizontal)
+3d0b27f|	|Antonio|	|Sun Apr 30 13:37:18 2017|	|Arreglo compilación androidManifest
+a91647f|	|Antonio|	|Sun Apr 30 10:34:20 2017|	|Creación de modelos BD
+2669d00|	|Antonio|	|Sat Apr 29 18:19:33 2017|	|Commit inicial
+909b8a3|	|Antonio|	|Mon Apr 17 18:16:29 2017|	|Merge branch 'master' of https://github.com/antoniopalbin/MyAssistant
+891c453|	|Antonio|	|Mon Apr 17 18:12:05 2017|	|Creación del proyecto Android
+89b8fa9|	|antoniopalbin|	|Mon Apr 17 18:08:30 2017|	|Initial commit

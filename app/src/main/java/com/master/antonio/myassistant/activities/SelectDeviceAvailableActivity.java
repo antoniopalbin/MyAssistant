@@ -116,7 +116,7 @@ public class SelectDeviceAvailableActivity extends AppCompatActivity {
                 Actividad actividad = new Actividad(new Date().getTime(), aux);
                 actividad.persist().execute();
 
-                if (item.getIdYoutube() != null && (MyAssistantUtilities.conectadoRedMovil(ctx) || MyAssistantUtilities.conectadoWifi(ctx))) {
+                if (item.getIdYoutube() != null && MyAssistantUtilities.estaConectado(ctx)) {
                     //Create intent
                     Intent intent = new Intent(SelectDeviceAvailableActivity.this, ViewVideoActivity.class);
                     intent.putExtra("videoId", item.getIdYoutube());
